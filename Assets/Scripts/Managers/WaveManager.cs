@@ -26,14 +26,11 @@ public class WaveManager : MonoBehaviour
     public Transform spawnPoint; // Where enemies will spawn
     public float timeBetweenWaves = 5f; // Time between two waves
 
-    //public Text remainingEnemiesText; // Optional: UI to show remaining enemies
-    //public Text enemyCountText; // Optional: UI to show counts of enemy types
-    
     private int currentWaveIndex = 0; // Track the current wave
     public int waveIndex = 1;
     public float waveStartTime; // Time when the current wave started
     private int enemiesLeftToSpawn; // Track how many enemies are left to spawn in the current wave
-    private int remainingEnemiesDebug; // how many enemies are remaining from the wave (resets when a new wave starts (might change it later))
+    private int remainingEnemiesDebug; // How many enemies are remaining from the wave (resets when a new wave starts (might change it later))
 
     private void Awake()
     {
@@ -46,7 +43,7 @@ public class WaveManager : MonoBehaviour
     }
 
     // Coroutine to spawn waves
-    private IEnumerator SpawnWaves()
+    private IEnumerator SpawnWaves() // Problem with delay timer and UI timer, they are out of sync
     {
         while (currentWaveIndex < waves.Count)
         {
@@ -59,9 +56,6 @@ public class WaveManager : MonoBehaviour
             Dictionary<GameObject, int> enemyCounts = CountEnemiesByType(currentWave);
             LogEnemyCounts(currentWaveIndex + 1, enemyCounts);
             //DisplayEnemyCounts(enemyCounts);
-
-            // Update remaining enemies UI
-            //UpdateRemainingEnemiesText();
 
             // Record the start time of this wave
             waveStartTime = Time.time;
@@ -161,26 +155,4 @@ public class WaveManager : MonoBehaviour
         float nextWaveStartTime = waveStartTime + timeBetweenWaves;
         return Mathf.Max(0, nextWaveStartTime - Time.time);
     }
-
-
-    // Display enemy type counts in UI (if enabled)
-    /*
-    private void DisplayEnemyCounts(Dictionary<GameObject, int> enemyCounts)
-    {
-        if (enemyCountText == null) return;
-
-        enemyCountText.text = "Enemy Counts:\n";
-        foreach (KeyValuePair<GameObject, int> pair in enemyCounts)
-        {
-            enemyCountText.text += $"{pair.Key.name}: {pair.Value}\n";
-        }
-    }
-
-    // Update the UI for remaining enemies (if enabled)
-    private void UpdateRemainingEnemiesText()
-    {
-        if (remainingEnemiesText == null) return;
-
-        remainingEnemiesText.text = $"Remaining Enemies: {remainingEnemiesInWave}";
-    }*/
 }
