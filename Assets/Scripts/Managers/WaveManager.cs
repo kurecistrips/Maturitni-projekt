@@ -1,6 +1,6 @@
-
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,12 +11,14 @@ public class EnemySpawnInfo
     public int count = 1; // How many enemies of this type to spawn
     public float timeBetweenSpawns = 0.5f; // Time between spawns within this batch
     public float spawnAfterStartTime = 0f; // Time after wave starts to spawn this batch
+
 }
 
 [System.Serializable]
 public class Wave
 {
     public List<EnemySpawnInfo> enemies; // List of enemy batches in this wave
+    //public float timeBetweenSpawnsTest;
 }
 
 public class WaveManager : MonoBehaviour
@@ -25,12 +27,14 @@ public class WaveManager : MonoBehaviour
     public List<Wave> waves; // List of waves
     public Transform spawnPoint; // Where enemies will spawn
     public float timeBetweenWaves = 5f; // Time between two waves
+    public GameOutcome gameOutcome;
 
     private int currentWaveIndex = 0; // Track the current wave
     public int waveIndex = 1;
     public float waveStartTime; // Time when the current wave started
     private int enemiesLeftToSpawn; // Track how many enemies are left to spawn in the current wave
     private int remainingEnemiesDebug; // How many enemies are remaining from the wave (resets when a new wave starts (might change it later))
+    
 
     private void Awake()
     {
@@ -39,11 +43,54 @@ public class WaveManager : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(SpawnWaves());
+        //StartCoroutine(SpawnWaves());
+        waveStartTime = Time.time;  
     }
 
+    private void Update()
+    {
+        if (currentWaveIndex < waves.Count)
+        {
+            float nextWaveStartTime = waveStartTime + timeBetweenWaves;
+            if (Time.time >= nextWaveStartTime)
+            {
+                SpawnWave();
+            }
+        }
+        else if(currentWaveIndex == waves.Count && remainingEnemiesDebug == 0) // Need a to add subtraction from remainingEnemiesDebug when enemies are destroyed (not working properly)
+        {
+            ScoreScreen(); 
+        }
+
+        
+    }
+
+    // Function to spawn a wave
+    private void SpawnWave()
+    {
+        if (currentWaveIndex > waves.Count) return;
+
+        Wave currentWave = waves[currentWaveIndex];
+
+        // Calculate the total number of enemies for the wave
+        enemiesLeftToSpawn = CalculateTotalEnemiesInWave(currentWave);
+
+        // Log and optionally display enemy counts by type
+        Dictionary<GameObject, int> enemyCounts = CountEnemiesByType(currentWave);
+        LogEnemyCounts(currentWaveIndex + 1, enemyCounts);
+
+        // Record the start time of this wave
+        waveStartTime = Time.time;
+
+        // Start spawning enemies in the wave
+        StartCoroutine(SpawnEnemiesInWave(currentWave));
+
+        currentWaveIndex++;
+        waveIndex++;
+    }
+    /*
     // Coroutine to spawn waves
-    private IEnumerator SpawnWaves() // Problem with delay timer and UI timer, they are out of sync
+    private IEnumerator SpawnWaves() // Problem with delay timer and UI timer, they are out of sync plus waves dont alway start after x amount of time if the timer is less than 20 seconds
     {
         while (currentWaveIndex < waves.Count)
         {
@@ -70,8 +117,9 @@ public class WaveManager : MonoBehaviour
             waveIndex++;
         }
 
-        Debug.Log("All waves completed!");
+        
     }
+    */
 
     // Coroutine to spawn enemies in a wave
     private IEnumerator SpawnEnemiesInWave(Wave wave)
@@ -96,7 +144,6 @@ public class WaveManager : MonoBehaviour
 
                 // Log and update UI
                 Debug.Log($"Spawned enemy. Remaining enemies in wave: {enemiesLeftToSpawn}");
-                //UpdateRemainingEnemiesText();
 
                 // If it's not the last enemy in the batch, wait between spawns
                 if (j < enemyInfo.count - 1)
@@ -105,6 +152,11 @@ public class WaveManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void ScoreScreen()
+    {
+        gameOutcome.Activate();
     }
 
     // Calculate the total number of enemies in a wave
@@ -150,6 +202,8 @@ public class WaveManager : MonoBehaviour
             Debug.Log($"{pair.Value} enemies of type {pair.Key.name}");
         }
     }
+
+    // Syncs time with Coroutine delay
     public float GetTimeUntilNextWave()
     {
         float nextWaveStartTime = waveStartTime + timeBetweenWaves;
