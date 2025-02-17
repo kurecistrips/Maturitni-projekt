@@ -23,6 +23,7 @@ public class WaveTest
 {
     public List<EnemySpawnInfoTest> enemies;
     public float timeBetweenWaves;
+    public int currencyPerWave;
 }
 
 public class WaveManagerTest : MonoBehaviour
@@ -35,7 +36,7 @@ public class WaveManagerTest : MonoBehaviour
     public static UnityEvent onEnemyDestroy = new UnityEvent();
 
     private int currentWaveIndex = 0;
-    public int waveIndex;
+    public int waveIndex = 1;
     public float waveStartTimeDebug;
     private float intermissionTime = 5f;
     private float timeSinceWaveStart;
@@ -49,6 +50,8 @@ public class WaveManagerTest : MonoBehaviour
     private int getCoins = 100;
     public int showReceiveCoins;
 
+    private bool skipBool = false;
+
     private void Awake()
     {
         onEnemyDestroy.AddListener(EnemyDestroyed);
@@ -57,7 +60,6 @@ public class WaveManagerTest : MonoBehaviour
 
     private void Start()
     {
-        waveIndex = currentWaveIndex;
         waveStartTimeDebug = Time.time;
     }
 
@@ -80,11 +82,20 @@ public class WaveManagerTest : MonoBehaviour
                 {
                     waveTimeLength = waves[currentWaveIndex].timeBetweenWaves;
                     SpawnWave();
+                    waveIndex++;
                     
                 }
-                else if (waveTimeLength <= 0 || enemiesAlive == 0 && enemiesLeftToSpawn <= 0){
+                else if (waveTimeLength <= 0 || enemiesAlive == 0 && enemiesLeftToSpawn <= 0 && skipBool == false)
+                {
+                    
+                    Intermission();
+                    
+                }
+                else if (skipBool == true) 
+                {
                     Intermission();
                 }
+                
             }
             else if(enemiesAlive <= 0 && enemiesLeftToSpawn == 0)
             {
@@ -92,27 +103,29 @@ public class WaveManagerTest : MonoBehaviour
             }
             waveTimeLength -= Time.deltaTime;
             showSkipPopUp();
-            Debug.Log($"waveTimeLength: {waveTimeLength}, required: {waves[waveIndex-1].timeBetweenWaves}, waveCommencing: {waveCommencing}");
+            
         }
         
     }
 
-    public bool showSkipPopUp()
+    public void showSkipPopUp()
     {
         
-        if (waveTimeLength <= waves[waveIndex].timeBetweenWaves && waveCommencing == true)
+        if (waveTimeLength <= waves[waveIndex-2].timeBetweenWaves * 0.90 && waveCommencing == true && prepBool == false && currentWaveIndex <= waves.Count-1 && SkipWaveScript.main.veoted == false)
         {
-            return true;
+            SkipWaveScript.main.skipPopUp.SetActive(true);
             
         }
         else {
-            return false;
+            SkipWaveScript.main.skipPopUp.SetActive(false);
         }
     }
 
     public void SkipWave()
     {
+        skipBool = true;
         Intermission();
+        
     }
 
     private void PrepTime()
@@ -127,11 +140,21 @@ public class WaveManagerTest : MonoBehaviour
     
     private void Intermission()
     {
-        
+        EnemyMovement[] activeEnemies = FindObjectsOfType<EnemyMovement>();
+        foreach (EnemyMovement enemy in activeEnemies)
+        {
+            enemy.fromLastWave = true;
+        }
+
+
         waveCommencing = false;
+        //LevelManager.main.IncreaseCurrency(waves[waveIndex-2].currencyPerWave);
+        enemiesAlive = 0;
         intermissionTime -= Time.deltaTime;
         if (intermissionTime <= 0)
         {
+            SkipWaveScript.main.veoted = false;
+            skipBool = false;
             waveIndex++;
             waveTimeLength = waves[currentWaveIndex].timeBetweenWaves;
             SpawnWave();
@@ -158,12 +181,14 @@ public class WaveManagerTest : MonoBehaviour
         StartCoroutine(SpawnEnemiesInWave(currentWave));
 
         currentWaveIndex++;
+        
         waveCommencing = true;
     }
 
     public void ScoreScreen()
     {
         gameOutcome.Activate();
+        waveCommencing = false;
         showReceiveCoins = getCoins;
         LevelManager.main.gameEnded = true;
         

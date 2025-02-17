@@ -19,7 +19,7 @@ public class TopUICanvas : MonoBehaviour
 
     private void Update()
     {
-        waveCounter.text = $"Wave: {WaveManagerTest.main.waveIndex}"; // This is the only way this thing works
+        waveCounter.text = $"Wave: {WaveManagerTest.main.waveIndex-1}"; // This is the only way this thing works
         
         time = WaveManagerTest.main.GetTimeUntilNextWave()+1;
 

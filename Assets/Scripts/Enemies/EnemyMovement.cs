@@ -12,6 +12,8 @@ public class EnemyMovement : MonoBehaviour
     private int pathIndex = 0;
     public bool fromLastWave = false;
 
+    public static EnemyMovement main;
+
     private void Start()
     {
         target = LevelManager.main.path[pathIndex];
@@ -30,12 +32,12 @@ public class EnemyMovement : MonoBehaviour
                 LevelManager.main.baseHealth -= EnemyHealth.main.healthInfo;
                 return;
             }
-            /*else if (pathIndex == LevelManager.main.path.Length && fromLastWave != false)
+            else if (pathIndex == LevelManager.main.path.Length && fromLastWave != false)
             {
-                WaveManager.onEnemyDestroy.Invoke();
                 Destroy(gameObject);
+                LevelManager.main.baseHealth -= EnemyHealth.main.healthInfo;
                 return;
-            }*/
+            }
             else 
             {
                 target = LevelManager.main.path[pathIndex];

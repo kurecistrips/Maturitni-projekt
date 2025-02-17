@@ -506,7 +506,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5010418902444554530}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5977780447759932054}
+        m_TargetAssemblyTypeName: SkipWaveScript, Assembly-CSharp
+        m_MethodName: OnClickVeto
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3764924169424163259
 GameObject:
   m_ObjectHideFlags: 0
@@ -769,6 +781,7 @@ MonoBehaviour:
   skipPopUp: {fileID: 5002093009327444762}
   voteYes: {fileID: 8459181067026449762}
   voteNo: {fileID: 8288994087245138592}
+  veoted: 0
 --- !u!1 &5113571177541326049
 GameObject:
   m_ObjectHideFlags: 0
@@ -888,7 +901,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8085907498166904306}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5977780447759932054}
+        m_TargetAssemblyTypeName: SkipWaveScript, Assembly-CSharp
+        m_MethodName: OnCLickYes
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5222685303688372897
 GameObject:
   m_ObjectHideFlags: 0

@@ -5116,6 +5116,7 @@ MonoBehaviour:
       timeBetweenSpawns: 0.5
       spawnAfterStartTime: 0
     timeBetweenWaves: 15
+    currencyPerWave: 100
   - enemies:
     - enemyPrefab: {fileID: 6464921860472007968, guid: 56759cc4e06068e449267b61de72836b, type: 3}
       count: 2
@@ -5126,6 +5127,7 @@ MonoBehaviour:
       timeBetweenSpawns: 0.5
       spawnAfterStartTime: 4
     timeBetweenWaves: 20
+    currencyPerWave: 125
   - enemies:
     - enemyPrefab: {fileID: 6464921860472007968, guid: 56759cc4e06068e449267b61de72836b, type: 3}
       count: 1
@@ -5140,15 +5142,17 @@ MonoBehaviour:
       timeBetweenSpawns: 0.25
       spawnAfterStartTime: 3
     timeBetweenWaves: 20
+    currencyPerWave: 175
   - enemies:
     - enemyPrefab: {fileID: 6464921860472007968, guid: e3edb1f794c99194c9f12e4dcc5e9dde, type: 3}
       count: 1
       timeBetweenSpawns: 0
       spawnAfterStartTime: 0
     timeBetweenWaves: 15
+    currencyPerWave: 200
   spawnPoint: {fileID: 568259075}
   gameOutcome: {fileID: 452620059}
-  waveIndex: 0
+  waveIndex: 1
   waveStartTimeDebug: 0
   waveCommencing: 0
   showReceiveCoins: 0
