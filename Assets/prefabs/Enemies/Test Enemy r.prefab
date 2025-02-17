@@ -520,7 +520,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: -1394354169416053600}
-  moveSpeed: 2
+  moveSpeed: 5
+  fromLastWave: 0
 --- !u!50 &-1394354169416053600
 Rigidbody2D:
   serializedVersion: 4
@@ -595,6 +596,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34f186f2813f0df4fa03faaf64be977d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 5
+  currencyWorth: 25
 --- !u!1 &7290330158483806712
 GameObject:
   m_ObjectHideFlags: 0

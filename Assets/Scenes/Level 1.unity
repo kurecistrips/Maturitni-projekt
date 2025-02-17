@@ -1267,6 +1267,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 104894290287737162, guid: 1be74f1f6d9353140ae9cb29cb57d944, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 787915015}
+    - target: {fileID: 104894290287737162, guid: 1be74f1f6d9353140ae9cb29cb57d944, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ReturnToMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 104894290287737162, guid: 1be74f1f6d9353140ae9cb29cb57d944, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: LevelManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 104894290287737162, guid: 1be74f1f6d9353140ae9cb29cb57d944, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 436801572124433487, guid: 1be74f1f6d9353140ae9cb29cb57d944, type: 3}
       propertyPath: m_Name
       value: Score Screen
@@ -5024,7 +5040,7 @@ GameObject:
   m_Component:
   - component: {fileID: 787915016}
   - component: {fileID: 787915015}
-  - component: {fileID: 787915017}
+  - component: {fileID: 787915018}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -5060,6 +5076,12 @@ MonoBehaviour:
   - {fileID: 970535441}
   - {fileID: 1051972068}
   - {fileID: 481084230}
+  showInGameTimer: 0
+  currency: 0
+  maxBaseHealth: 1000
+  maxHealth: 0
+  baseHealth: 0
+  gameEnded: 0
 --- !u!4 &787915016
 Transform:
   m_ObjectHideFlags: 0
@@ -5075,7 +5097,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &787915017
+--- !u!114 &787915018
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5084,7 +5106,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 787915014}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ffda453fa04b624baaa9d0bd844c041, type: 3}
+  m_Script: {fileID: 11500000, guid: a237fee0cc027e14d906840c293a79b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   waves:
@@ -5093,34 +5115,43 @@ MonoBehaviour:
       count: 4
       timeBetweenSpawns: 0.5
       spawnAfterStartTime: 0
+    timeBetweenWaves: 15
   - enemies:
     - enemyPrefab: {fileID: 6464921860472007968, guid: 56759cc4e06068e449267b61de72836b, type: 3}
       count: 2
       timeBetweenSpawns: 0.25
-      spawnAfterStartTime: 2
-    - enemyPrefab: {fileID: 6464921860472007968, guid: e3edb1f794c99194c9f12e4dcc5e9dde, type: 3}
+      spawnAfterStartTime: 1
+    - enemyPrefab: {fileID: 6464921860472007968, guid: fe02fe508a7a1494bb511c0e9f03f04b, type: 3}
       count: 3
       timeBetweenSpawns: 0.5
       spawnAfterStartTime: 4
-    - enemyPrefab: {fileID: 6464921860472007968, guid: fe02fe508a7a1494bb511c0e9f03f04b, type: 3}
-      count: 4
-      timeBetweenSpawns: 0.1
-      spawnAfterStartTime: 5
+    timeBetweenWaves: 20
   - enemies:
     - enemyPrefab: {fileID: 6464921860472007968, guid: 56759cc4e06068e449267b61de72836b, type: 3}
       count: 1
       timeBetweenSpawns: 0.1
       spawnAfterStartTime: 0
+    - enemyPrefab: {fileID: 6464921860472007968, guid: fe02fe508a7a1494bb511c0e9f03f04b, type: 3}
+      count: 2
+      timeBetweenSpawns: 0.5
+      spawnAfterStartTime: 1
+    - enemyPrefab: {fileID: 6464921860472007968, guid: e3edb1f794c99194c9f12e4dcc5e9dde, type: 3}
+      count: 3
+      timeBetweenSpawns: 0.25
+      spawnAfterStartTime: 3
+    timeBetweenWaves: 20
   - enemies:
     - enemyPrefab: {fileID: 6464921860472007968, guid: e3edb1f794c99194c9f12e4dcc5e9dde, type: 3}
       count: 1
-      timeBetweenSpawns: 1
-      spawnAfterStartTime: 1
+      timeBetweenSpawns: 0
+      spawnAfterStartTime: 0
+    timeBetweenWaves: 15
   spawnPoint: {fileID: 568259075}
-  timeBetweenWaves: 25
   gameOutcome: {fileID: 452620059}
   waveIndex: 0
-  waveStartTime: 0
+  waveStartTimeDebug: 0
+  waveCommencing: 0
+  showReceiveCoins: 0
 --- !u!1 &799253049
 GameObject:
   m_ObjectHideFlags: 0

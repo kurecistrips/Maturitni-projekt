@@ -1,0 +1,262 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using System.Runtime.Serialization;
+using JetBrains.Annotations;
+using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
+
+[System.Serializable]
+
+public class EnemySpawnInfoTest
+{
+    public GameObject enemyPrefab;
+    public int count = 1;
+    public float timeBetweenSpawns = 0.5f;
+    public float spawnAfterStartTime = 0f;
+}
+
+[System.Serializable]
+
+public class WaveTest
+{
+    public List<EnemySpawnInfoTest> enemies;
+    public float timeBetweenWaves;
+}
+
+public class WaveManagerTest : MonoBehaviour
+{
+    public static WaveManagerTest main;
+    public List<WaveTest> waves;
+    public Transform spawnPoint;
+    public GameOutcome gameOutcome;
+
+    public static UnityEvent onEnemyDestroy = new UnityEvent();
+
+    private int currentWaveIndex = 0;
+    public int waveIndex;
+    public float waveStartTimeDebug;
+    private float intermissionTime = 5f;
+    private float timeSinceWaveStart;
+    private float preptime = 20f;
+    private bool prepBool = true;
+    private float waveTimeLength;
+
+    private int enemiesLeftToSpawn;
+    private int enemiesAlive;
+    public bool waveCommencing = false;
+    private int getCoins = 100;
+    public int showReceiveCoins;
+
+    private void Awake()
+    {
+        onEnemyDestroy.AddListener(EnemyDestroyed);
+        main = this;
+    }
+
+    private void Start()
+    {
+        waveIndex = currentWaveIndex;
+        waveStartTimeDebug = Time.time;
+    }
+
+    private void Update()
+    {
+        timeSinceWaveStart += Time.deltaTime;
+        
+
+        if (prepBool)
+        {
+            PrepTime();
+        }        
+        else
+        {
+            preptime += 0;
+            
+            if (currentWaveIndex < waves.Count)
+            {
+                if (waveCommencing == true && currentWaveIndex == 0)
+                {
+                    waveTimeLength = waves[currentWaveIndex].timeBetweenWaves;
+                    SpawnWave();
+                    
+                }
+                else if (waveTimeLength <= 0 || enemiesAlive == 0 && enemiesLeftToSpawn <= 0){
+                    Intermission();
+                }
+            }
+            else if(enemiesAlive <= 0 && enemiesLeftToSpawn == 0)
+            {
+                ScoreScreen();
+            }
+            waveTimeLength -= Time.deltaTime;
+            showSkipPopUp();
+            Debug.Log($"waveTimeLength: {waveTimeLength}, required: {waves[waveIndex-1].timeBetweenWaves}, waveCommencing: {waveCommencing}");
+        }
+        
+    }
+
+    public bool showSkipPopUp()
+    {
+        
+        if (waveTimeLength <= waves[waveIndex].timeBetweenWaves && waveCommencing == true)
+        {
+            return true;
+            
+        }
+        else {
+            return false;
+        }
+    }
+
+    public void SkipWave()
+    {
+        Intermission();
+    }
+
+    private void PrepTime()
+    {
+        preptime -= Time.deltaTime;
+        if (preptime <= 0)
+        {
+            prepBool = false;
+            waveCommencing = true;
+        }
+    }
+    
+    private void Intermission()
+    {
+        
+        waveCommencing = false;
+        intermissionTime -= Time.deltaTime;
+        if (intermissionTime <= 0)
+        {
+            waveIndex++;
+            waveTimeLength = waves[currentWaveIndex].timeBetweenWaves;
+            SpawnWave();
+            intermissionTime = 5f;
+        }
+    }
+
+    private void SpawnWave()
+    {
+        
+        if (currentWaveIndex >= waves.Count) return;
+
+        Debug.Log($"wave: {waveIndex} is spawning");
+
+        WaveTest currentWave = waves[currentWaveIndex];
+
+        enemiesLeftToSpawn = CalculateTotalEnemiesInWave(currentWave);
+
+        Dictionary<GameObject, int> enemyCounts = CountEnemiesByType(currentWave);
+        LogEnemyCounts(currentWaveIndex + 1, enemyCounts);
+
+        waveStartTimeDebug = Time.time;
+
+        StartCoroutine(SpawnEnemiesInWave(currentWave));
+
+        currentWaveIndex++;
+        waveCommencing = true;
+    }
+
+    public void ScoreScreen()
+    {
+        gameOutcome.Activate();
+        showReceiveCoins = getCoins;
+        LevelManager.main.gameEnded = true;
+        
+    }
+
+    private IEnumerator SpawnEnemiesInWave(WaveTest wave)
+    {
+        for (int i = 0; i < wave.enemies.Count; i++)
+        {
+            EnemySpawnInfoTest enemyInfo = wave.enemies[i];
+
+            float enemySpawnTime = waveStartTimeDebug + enemyInfo.spawnAfterStartTime;
+            yield return new WaitUntil(() => Time.time >= enemySpawnTime);
+
+            for (int j = 0; j < enemyInfo.count; j++)
+            {
+                Instantiate(enemyInfo.enemyPrefab, spawnPoint.position, Quaternion.identity);
+
+                enemiesLeftToSpawn--;
+                enemiesAlive++;
+
+                Debug.Log($"Spawned enemy. Remaining enemies in wave: {enemiesLeftToSpawn}");
+
+                if (j < enemyInfo.count - 1)
+                {
+                    yield return new WaitForSeconds(enemyInfo.timeBetweenSpawns);
+                }
+            }
+        }
+    }
+
+    private int CalculateTotalEnemiesInWave(WaveTest wave)
+    {
+        int totalEnemies = 0;
+        enemiesAlive = 0;
+
+        foreach (EnemySpawnInfoTest enemyInfo in wave.enemies)
+        {
+            totalEnemies += enemyInfo.count;
+        }
+        return totalEnemies;
+    }
+
+    private Dictionary<GameObject, int> CountEnemiesByType(WaveTest wave)
+    {
+        Dictionary<GameObject, int> enemyTypeCounts = new Dictionary<GameObject, int>();
+
+        foreach (EnemySpawnInfoTest enemyInfo in wave.enemies)
+        {
+            if (enemyTypeCounts.ContainsKey(enemyInfo.enemyPrefab))
+            {
+                enemyTypeCounts[enemyInfo.enemyPrefab] += enemyInfo.count;
+            }
+            else
+            {
+                enemyTypeCounts[enemyInfo.enemyPrefab] = enemyInfo.count;
+            }
+        }
+        return enemyTypeCounts;
+    }
+
+    private void LogEnemyCounts(int waveNum, Dictionary<GameObject, int> enemyCounts)
+    {
+        Debug.Log($"Wave {waveNum} enemy counts:");
+        foreach (KeyValuePair<GameObject, int> pair in enemyCounts)
+        {
+            Debug.Log($"{pair.Value} enemies of type {pair.Key.name}");
+        }
+    }
+
+    public float GetTimeUntilNextWave()
+    {
+        if (LevelManager.main.gameEnded == false)
+        {
+            if (prepBool)
+            {
+                return preptime;
+            }
+            else if (!waveCommencing)
+            {
+                return intermissionTime;
+            }
+            else
+            {
+                return waveTimeLength;
+            }
+        }
+        return -1f;  
+    }
+
+    private void EnemyDestroyed()
+    {
+        enemiesAlive--;
+    }
+
+}

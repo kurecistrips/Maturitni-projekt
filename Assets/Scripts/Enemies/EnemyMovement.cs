@@ -10,6 +10,7 @@ public class EnemyMovement : MonoBehaviour
 
     private Transform target;
     private int pathIndex = 0;
+    public bool fromLastWave = false;
 
     private void Start()
     {
@@ -22,11 +23,19 @@ public class EnemyMovement : MonoBehaviour
         {
             pathIndex++;
 
-            if (pathIndex == LevelManager.main.path.Length)
+            if (pathIndex == LevelManager.main.path.Length && fromLastWave != true)
             {
+                WaveManagerTest.onEnemyDestroy.Invoke();
                 Destroy(gameObject);
+                LevelManager.main.baseHealth -= EnemyHealth.main.healthInfo;
                 return;
             }
+            /*else if (pathIndex == LevelManager.main.path.Length && fromLastWave != false)
+            {
+                WaveManager.onEnemyDestroy.Invoke();
+                Destroy(gameObject);
+                return;
+            }*/
             else 
             {
                 target = LevelManager.main.path[pathIndex];

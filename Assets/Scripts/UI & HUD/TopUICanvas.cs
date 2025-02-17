@@ -9,32 +9,26 @@ public class TopUICanvas : MonoBehaviour
     public GameObject topUICanvas;
     public TextMeshProUGUI timeBetweenWavesText;
     public TextMeshProUGUI waveCounter;
-    public TextMeshProUGUI healthBar;
     
     float time;
-    private int hp;
 
     void Start()
     {
-        time = WaveManager.main.timeBetweenWaves;
+        //time = WaveManager.main.waves[waveIndex].timeBetweenWaves;
     }
 
     private void Update()
     {
-        waveCounter.text = $"Wave: {WaveManager.main.waveIndex}"; // This is the only way this thing works
+        waveCounter.text = $"Wave: {WaveManagerTest.main.waveIndex}"; // This is the only way this thing works
         
-        time = WaveManager.main.GetTimeUntilNextWave() + 1;
+        time = WaveManagerTest.main.GetTimeUntilNextWave()+1;
 
-        if (time <= 0)
-        {
-            time = WaveManager.main.timeBetweenWaves;
-        }
         
-
-        time -= Time.deltaTime;
         float minutes = Mathf.FloorToInt(time / 60);
         float seconds = Mathf.FloorToInt(time % 60);
 
         timeBetweenWavesText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+
+        
     }
 }
