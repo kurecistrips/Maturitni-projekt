@@ -50,6 +50,7 @@ public class WaveManagerTest : MonoBehaviour
     private int getCoins = 100;
     public int showReceiveCoins;
 
+    private bool currencyGiven = false;
     private bool skipBool = false;
 
     private void Awake()
@@ -146,9 +147,14 @@ public class WaveManagerTest : MonoBehaviour
             enemy.fromLastWave = true;
         }
 
-
         waveCommencing = false;
-        //LevelManager.main.IncreaseCurrency(waves[waveIndex-2].currencyPerWave);
+
+        if (!currencyGiven)
+        {
+            LevelManager.main.IncreaseCurrency(waves[waveIndex-2].currencyPerWave);
+            currencyGiven = true;
+        }
+        
         enemiesAlive = 0;
         intermissionTime -= Time.deltaTime;
         if (intermissionTime <= 0)
@@ -157,6 +163,7 @@ public class WaveManagerTest : MonoBehaviour
             skipBool = false;
             waveIndex++;
             waveTimeLength = waves[currentWaveIndex].timeBetweenWaves;
+            currencyGiven = false;
             SpawnWave();
             intermissionTime = 5f;
         }
