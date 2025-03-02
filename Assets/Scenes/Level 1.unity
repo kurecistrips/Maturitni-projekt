@@ -875,6 +875,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1581548684}
     m_Modifications:
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1640450969134688141, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10
@@ -1131,6 +1143,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1581548684}
     m_Modifications:
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1640450969134688141, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10
@@ -2692,6 +2716,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1581548684}
     m_Modifications:
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1640450969134688141, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10
@@ -4043,6 +4079,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1581548684}
     m_Modifications:
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1640450969134688141, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10
@@ -4584,6 +4632,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1581548684}
     m_Modifications:
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1640450969134688141, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10
@@ -4716,6 +4776,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1581548684}
     m_Modifications:
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1640450969134688141, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10
@@ -5195,6 +5267,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1581548684}
     m_Modifications:
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1640450969134688141, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10
@@ -5637,6 +5721,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1581548684}
     m_Modifications:
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1640450969134688141, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10
@@ -6978,6 +7074,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1581548684}
     m_Modifications:
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1640450969134688141, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10
@@ -8365,6 +8473,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1581548684}
     m_Modifications:
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1640450969134688141, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10
@@ -8900,6 +9020,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1581548684}
     m_Modifications:
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1640450969134688141, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10
@@ -9795,6 +9927,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1581548684}
     m_Modifications:
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1640450969134688141, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10
@@ -9931,6 +10075,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1581548684}
     m_Modifications:
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1640450969134688141, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10
@@ -10005,6 +10161,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1581548684}
     m_Modifications:
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1640450969134688141, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10
@@ -10381,6 +10549,67 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1640450969134688141, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
   m_PrefabInstance: {fileID: 1470623254}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1500104484
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 359274409780690241, guid: 8d2c6820b2deaf5488aa64814dda073f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.5000155
+      objectReference: {fileID: 0}
+    - target: {fileID: 359274409780690241, guid: 8d2c6820b2deaf5488aa64814dda073f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.5014218
+      objectReference: {fileID: 0}
+    - target: {fileID: 359274409780690241, guid: 8d2c6820b2deaf5488aa64814dda073f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 359274409780690241, guid: 8d2c6820b2deaf5488aa64814dda073f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 359274409780690241, guid: 8d2c6820b2deaf5488aa64814dda073f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 359274409780690241, guid: 8d2c6820b2deaf5488aa64814dda073f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 359274409780690241, guid: 8d2c6820b2deaf5488aa64814dda073f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 359274409780690241, guid: 8d2c6820b2deaf5488aa64814dda073f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 359274409780690241, guid: 8d2c6820b2deaf5488aa64814dda073f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 359274409780690241, guid: 8d2c6820b2deaf5488aa64814dda073f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7220425690895169736, guid: 8d2c6820b2deaf5488aa64814dda073f, type: 3}
+      propertyPath: costToPlace
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8907402369031678814, guid: 8d2c6820b2deaf5488aa64814dda073f, type: 3}
+      propertyPath: m_Name
+      value: Test Tower
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8d2c6820b2deaf5488aa64814dda073f, type: 3}
 --- !u!1001 &1519361055
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10575,6 +10804,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1581548684}
     m_Modifications:
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1640450969134688141, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10
@@ -10649,6 +10890,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1581548684}
     m_Modifications:
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1640450969134688141, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10
@@ -10723,6 +10976,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1581548684}
     m_Modifications:
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1640450969134688141, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10
@@ -11598,6 +11863,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1581548684}
     m_Modifications:
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1640450969134688141, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10
@@ -11672,6 +11949,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1581548684}
     m_Modifications:
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1640450969134688141, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10
@@ -13013,6 +13302,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1581548684}
     m_Modifications:
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1640450969134688141, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10
@@ -13269,6 +13570,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1581548684}
     m_Modifications:
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 974706229145869146, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
+      propertyPath: hoverColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1640450969134688141, guid: fc9f4961eb1957f42b8e2996b014e33c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10
@@ -13666,3 +13979,4 @@ SceneRoots:
   - {fileID: 4897437206837879738}
   - {fileID: 7076081975717762724}
   - {fileID: 188360130}
+  - {fileID: 1500104484}

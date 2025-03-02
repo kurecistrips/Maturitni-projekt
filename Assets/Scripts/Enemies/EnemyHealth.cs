@@ -9,6 +9,7 @@ public class EnemyHealth : MonoBehaviour
     private int health;
     public int healthInfo;
     [SerializeField] private int currencyWorth;
+    public bool isHidden;
 
     private void Awake()
     {

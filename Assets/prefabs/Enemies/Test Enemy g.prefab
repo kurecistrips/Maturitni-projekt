@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: -1394354169416053600}
   - component: {fileID: 4254828255177822688}
   - component: {fileID: 5084161609746949389}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Test Enemy g
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -180,3 +180,4 @@ MonoBehaviour:
   maxHealth: 10
   healthInfo: 0
   currencyWorth: 200
+  isHidden: 0
