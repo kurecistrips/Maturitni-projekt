@@ -152,7 +152,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3214100208314991974
 RectTransform:
   m_ObjectHideFlags: 0
@@ -863,6 +863,7 @@ MonoBehaviour:
   TowerName: Test Tower
   level: 1
   costToPlace: 100
+  totalCost: 0
   attackRange: 2
   attackSpeed: 1
   damage: 1
@@ -870,6 +871,9 @@ MonoBehaviour:
   baseRenderer: {fileID: 3429443560712021479}
   turretRendere: {fileID: 2883237879915664009}
   towerImage: {fileID: 21300000, guid: 75436e0bc13cb2149a15f26f5fc20419, type: 3}
+  lvlText: {fileID: 645299448035511244}
+  towerUI: {fileID: 2081365357352962079}
+  rangeCircle: {fileID: 0}
   upgrades:
   - level: 2
     cost: 50
@@ -907,6 +911,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   firingPoint: {fileID: 4132700695299013602}
-  rotatingPoint: {fileID: 0}
+  rotatingPoint: {fileID: 1692799428711529759}
   targetInRange: []
   currentTarget: {fileID: 0}
+  currentTargetingStyle: 0
+  tower: {fileID: 7220425690895169736}

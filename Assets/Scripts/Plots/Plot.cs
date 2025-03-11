@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Plot : MonoBehaviour
@@ -24,12 +23,21 @@ public class Plot : MonoBehaviour
     {
         sr.color = startColor;
     }
-    
 
+    public void OnMouseDown()
+    {
+        if (tower != null)
+        {
+            tower.OpenTowerUI();
+            return;
+        }    
 
+        GameObject towerToBuild = LoadoutManager.main.GetSelectedTower();
+        if (towerToBuild == null) return;
+        LoadoutManager.main.AfterPlacement();
+        towerGO = Instantiate(towerToBuild.gameObject, transform.position, Quaternion.identity);
+        tower = towerGO.GetComponent<Tower>();
 
-
-
-
-
+        Debug.Log($"{towerToBuild} {transform.position}");
+    }
 }

@@ -12,6 +12,7 @@ public class LevelManager : MonoBehaviour
 
     private float totalTime = 0f;
     public float showInGameTimer;
+    [SerializeField] private int startingCurrency;
     public int currency;
     [SerializeField] private int maxBaseHealth;
     public int maxHealth;
@@ -27,6 +28,7 @@ public class LevelManager : MonoBehaviour
     {
         maxHealth = maxBaseHealth;
         baseHealth = maxBaseHealth;
+        currency = startingCurrency;
     }
 
     public void Update()
@@ -49,6 +51,10 @@ public class LevelManager : MonoBehaviour
     public void IncreaseCurrency(int amount)
     {
         currency += amount;
+    }
+    public void SpendCurrency(int amount)
+    {
+        currency -= amount;
     }
 
     private void PlayerDeath()

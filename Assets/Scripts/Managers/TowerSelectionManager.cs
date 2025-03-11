@@ -7,10 +7,10 @@ using UnityEngine.UI;
 
 public class TowerSelectionManager : MonoBehaviour
 {
+    public static TowerSelectionManager main;
     public TowerButtons[] towerButtons;
     public List<GameObject> availableTowers;
     public List<GameObject> selectedTowers = new List<GameObject>();
-    public Transform selectedTowerContainer;
     public TextMeshProUGUI nameText, damageText, rangeText, costText;
     public Image towerImage;
     public Button equipButton;
@@ -21,6 +21,11 @@ public class TowerSelectionManager : MonoBehaviour
 
     private string savePath;
     private GameObject selectedTower;
+
+    void Awake()
+    {
+        main = this;
+    }
 
     private void Start()
     {
