@@ -20,18 +20,18 @@ public class HitScanTower : MonoBehaviour
     [SerializeField] private Tower tower;
 
 
-    void Awake()
+    private void Awake()
     {
         
     }
 
-    void Start()
+    private void Start()
     {
        
         _previousTargetingStyle = currentTargetingStyle;
     }
 
-    void Update()
+    private void Update()
     {
         if (_previousTargetingStyle != currentTargetingStyle)
         {

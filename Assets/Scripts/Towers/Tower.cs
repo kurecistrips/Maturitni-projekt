@@ -27,12 +27,12 @@ public class Tower : MonoBehaviour
     
     public TowerUpgrades[] upgrades;
 
-    void Awake()
+    private void Awake()
     {
         main = this;
     }
 
-    void Start()
+    private void Start()
     {
         baseRenderer = transform.Find("Base").GetComponent<SpriteRenderer>();
         turretRendere = transform.Find("Rotating Point/Turret").GetComponent<SpriteRenderer>();
@@ -65,6 +65,7 @@ public class Tower : MonoBehaviour
             }
             else{
                 Debug.Log($"Not enough money {upgrade.cost - LevelManager.main.currency}");
+                WarningPopUp.main.PopUp(upgrade.cost);
             }
             
         }

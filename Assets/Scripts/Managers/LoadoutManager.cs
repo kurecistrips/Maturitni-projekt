@@ -15,20 +15,21 @@ public class LoadoutManager : MonoBehaviour
     private GameObject towerPreview;
     private Tower selectedTower;
     private bool isPlacingTower = false;
+    private int needed = 0;
 
     private string savePath;
 
-    void Awake()
+    private void Awake()
     {
         main = this;
     }
 
-    void Start()
+    private void Start()
     {
         savePath = Application.persistentDataPath + "/selectedTowers.json";
         LoadSeletedTowers();
     }
-    void Update()
+    private void Update()
     {
         if (isPlacingTower && towerPreview != null)
         {
@@ -45,7 +46,7 @@ public class LoadoutManager : MonoBehaviour
         }
     }
 
-    void LoadSeletedTowers()
+    private void LoadSeletedTowers()
     {
         if (!File.Exists(savePath)) return;
         
@@ -63,7 +64,7 @@ public class LoadoutManager : MonoBehaviour
         }
         AssignTowersToButtons();
     }
-    void AssignTowersToButtons()
+    private void AssignTowersToButtons()
     {
         for (int i = 0; i < towerButtons.Length; i++)
         {
@@ -96,9 +97,9 @@ public class LoadoutManager : MonoBehaviour
             towerPreview = Instantiate(selectedTower.gameObject);
         }
         else{
-            
-            Debug.Log($"Not enough money {selectedTower.costToPlace - LevelManager.main.currency}");
-            //CancelPlacement();
+            needed = selectedTower.costToPlace - LevelManager.main.currency;
+            Debug.Log($"Not enough money {needed}");
+            WarningPopUp.main.PopUp(needed);
             selectedTower = null;
         }
         
