@@ -5,11 +5,14 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     public static EnemyHealth main;
+    private EnemyMovement enemyMovement;
     public int maxHealth;
     private int health;
     public int healthInfo;
+    public string enemyName;
     [SerializeField] private int currencyWorth;
     public bool isHidden;
+    public bool isBoss;
 
     private void Awake()
     {
@@ -18,7 +21,13 @@ public class EnemyHealth : MonoBehaviour
     }
     private void Start()
     {
-        health = maxHealth;
+        health = maxHealth;   
+        enemyMovement = GetComponent<EnemyMovement>();
+        if (isBoss == true)
+        {
+            BossUI.main.SetOn();
+            BossUI.main.SetBoss(this);
+        }
     }
     private void Update()
     {
@@ -31,7 +40,10 @@ public class EnemyHealth : MonoBehaviour
 
         if (health <= 0)
         {
-            WaveManagerTest.onEnemyDestroy.Invoke();
+            if (enemyMovement.fromLastWave == false)
+            {
+                WaveManagerTest.onEnemyDestroy.Invoke();
+            }
             LevelManager.main.IncreaseCurrency(currencyWorth);
             Destroy(gameObject);
         }

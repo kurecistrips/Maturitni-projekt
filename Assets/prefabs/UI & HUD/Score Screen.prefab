@@ -156,6 +156,7 @@ MonoBehaviour:
   canvas: {fileID: 436801572124433487}
   timeText: {fileID: 774458325671868503}
   coinText: {fileID: 660174408713565807}
+  outcomeText: {fileID: 4313332765174444482}
 --- !u!1 &670864195948317134
 GameObject:
   m_ObjectHideFlags: 0
@@ -763,10 +764,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 6518677343606523620}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 400, y: 150}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9068921438842474608
 CanvasRenderer:

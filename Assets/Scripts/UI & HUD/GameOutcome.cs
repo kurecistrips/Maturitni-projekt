@@ -8,9 +8,11 @@ public class GameOutcome : MonoBehaviour
     public GameObject canvas;
     public TextMeshProUGUI timeText;
     public TextMeshProUGUI coinText;
+    public TextMeshProUGUI outcomeText;
     private bool isActive = false;
     private int showCoins;
     private float timer;
+    private string textOutCome;
 
     private void Start()
     {
@@ -23,8 +25,17 @@ public class GameOutcome : MonoBehaviour
     	showCoins = WaveManagerTest.main.showReceiveCoins;
         timer = LevelManager.main.showInGameTimer;
         
+        if (LevelManager.main.victory == true)
+        {
+            textOutCome = "Victory";
+        }
+        else
+        {
+            textOutCome = "Defeat";
+        }
     }
 
+    
     public void Activate()
     {
         isActive = true;
@@ -33,6 +44,7 @@ public class GameOutcome : MonoBehaviour
         float seconds = Mathf.FloorToInt(timer % 60);
         timeText.text = "Time: " + string.Format("{0:00}:{1:00}", minutes, seconds);
         coinText.text = $"Money: {showCoins}";
+        outcomeText.text = $"{textOutCome}";
 
     }
 }

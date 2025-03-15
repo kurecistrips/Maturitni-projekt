@@ -434,7 +434,7 @@ GameObject:
   - component: {fileID: 6072413941995609764}
   - component: {fileID: 3565852144678169939}
   m_Layer: 7
-  m_Name: Test Enemy r
+  m_Name: Test Enemy Boss
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -598,11 +598,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34f186f2813f0df4fa03faaf64be977d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
+  maxHealth: 1000
   healthInfo: 0
-  enemyName: Red
-  currencyWorth: 25
+  enemyName: Boss 1
+  currencyWorth: 10000
   isHidden: 0
+  isBoss: 1
 --- !u!114 &3565852144678169939
 MonoBehaviour:
   m_ObjectHideFlags: 0

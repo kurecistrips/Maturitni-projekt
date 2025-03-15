@@ -13,7 +13,8 @@ public class TowerUpgrades
     public int newDamage;
     public Sprite newBaseSprite;
     public Sprite newTurretSprite;
-    public GameObject newPorjectilePrefab; // Only for projectile towers
+    public Sprite newPorjectilePrefab; // Only for projectile towers
     public float newProjectileSpeed; // Only for projectile towers
+    public float newExplosionRadius;
     public bool hiddenDetection;
 }

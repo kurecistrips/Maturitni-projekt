@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,99 +13,117 @@ public class HitScanTower : MonoBehaviour
     public Transform rotatingPoint;
     private float nextAttackTime = 0f;
 
-    [SerializeField] private List<EnemyHealth> targetInRange = new();
+    [SerializeField] private List<EnemyHealth> targetsInRange = new();
     [SerializeField] private EnemyHealth currentTarget;
     [SerializeField] private TargetingStyle currentTargetingStyle = TargetingStyle.First;
     private TargetingStyle _previousTargetingStyle;
+    private float smoothTime = 0.1f;
 
     [SerializeField] private Tower tower;
+    private float detectionRadius;
 
 
     private void Awake()
     {
-        
-    }
-
-    private void Start()
-    {
-       
         _previousTargetingStyle = currentTargetingStyle;
+        
     }
 
     private void Update()
     {
+        detectionRadius = tower.attackRange;
+        DetectEnemies();
+        GetCurrentTarget();
+
+        if (currentTarget == null) return;
+        RotateTowardsTarget();   
         if (_previousTargetingStyle != currentTargetingStyle)
         {
             HandleTargetStyleSwitch();
         }
 
-        if (Time.time > nextAttackTime)
+        if (nextAttackTime <= 0f)
         {
             Attack();
-            nextAttackTime = Time.time + (1f / Tower.main.attackSpeed);
+            nextAttackTime = 1f / Tower.main.attackSpeed;
         }
+        nextAttackTime -= Time.deltaTime;
     } 
     public void Attack()
     {
-        RaycastHit2D hit = Physics2D.Raycast(firingPoint.position, firingPoint.right, Tower.main.attackSpeed, enemyLayer);
+        
+
+        Vector2 direction = (currentTarget.transform.position - firingPoint.position).normalized;
+        RaycastHit2D hit = Physics2D.Raycast(firingPoint.position, direction, Tower.main.attackSpeed, enemyLayer);
         if (hit.collider != null && hit.collider.CompareTag("Enemy"))
         {
             EnemyHealth enemy = hit.collider.GetComponent<EnemyHealth>();
-            if (enemy != null)
-            {
-                if (enemy.isHidden && !Tower.main.hiddenDetection) return;
-                enemy.TakeDamage(Tower.main.damage);
-                
-            }
+            
+            enemy.TakeDamage(Tower.main.damage); 
         }
     }
-    private void OnTriggerEnter(Collider other)
+    private void RotateTowardsTarget()
     {
-        if (other.CompareTag("Enemy"))
-        {
-            AddTargetToInRangeList(other.GetComponent<EnemyHealth>());
-        }
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Enemy"))
-        {
-            RemoveTargetFromInRangeList(other.GetComponent<EnemyHealth>());
-        }
+
+        float angle = Mathf.Atan2(currentTarget.transform.position.y - transform.position.y,
+        currentTarget.transform.position.x - transform.position.x) * Mathf.Rad2Deg - 90f;
+    
+        Quaternion targetRotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
+
+        rotatingPoint.rotation = Quaternion.Slerp(rotatingPoint.rotation, targetRotation, smoothTime);
     }
 
-    /*private void OnDrawGizmos() //debug testing
+    private void OnDrawGizmos() //debug testing
     {
         Handles.color = Color.yellow;
         Handles.DrawWireDisc(transform.position, transform.forward, Tower.main.attackRange);
-    }*/
+    }
 
-    public void AddTargetToInRangeList(EnemyHealth target)
+    private void DetectEnemies()
     {
-        targetInRange.Add(target);
-        GetCurrentTarget();
+        targetsInRange.Clear();
+
+        Collider2D[] detectedEnemies = Physics2D.OverlapCircleAll(transform.position, detectionRadius, enemyLayer);
+        foreach (var collider in detectedEnemies)
+        {
+            EnemyHealth enemy = collider.GetComponent<EnemyHealth>();
+            if (enemy != null && (!enemy.isHidden || (enemy.isHidden && tower.hiddenDetection)))
+            {
+                targetsInRange.Add(enemy);
+            }
+        }
     }
-    public void RemoveTargetFromInRangeList(EnemyHealth target)
-    {
-        targetInRange.Remove(target);
-        GetCurrentTarget();
-    }
+
 
     private void GetCurrentTarget()
     {
-        if (targetInRange.Count <= 0)
+        if (targetsInRange.Count <= 0)
         {
             currentTarget = null;
             return;
         }
 
-        currentTarget = currentTargetingStyle switch
-        {
-            TargetingStyle.First => targetInRange.First(),
-            TargetingStyle.Last => targetInRange.Last()
-            
-        };
+        targetsInRange = targetsInRange.Where(e => e != null && e.GetComponent<EnemyMovement>() != null)
+        .OrderByDescending(e => e.GetComponent<EnemyMovement>().pathIndx)
+        .ToList();
 
+        switch (currentTargetingStyle)
+        {
+            case TargetingStyle.First:
+                currentTarget = targetsInRange.First();
+                break;
+            case TargetingStyle.Last:
+                currentTarget = targetsInRange.Last();
+                break;
+            case TargetingStyle.Strong:
+                currentTarget = targetsInRange.OrderBy(e => e.GetComponent<EnemyHealth>().healthInfo).First();
+                break;
+            case TargetingStyle.Weak:
+                currentTarget = targetsInRange.OrderBy(e => e.GetComponent<EnemyHealth>().healthInfo).Last();
+                break;
+            default:
+                break;
+        };
     }
     
     private void HandleTargetStyleSwitch()
@@ -112,18 +131,6 @@ public class HitScanTower : MonoBehaviour
         _previousTargetingStyle = currentTargetingStyle;
         GetCurrentTarget();
     }
-
-
-
 }
 
-namespace Enums
-{
-    public enum TargetingStyle
-    {
-        First,
-        Last,
-        Strong,
-        Weak
-    }    
-}
+

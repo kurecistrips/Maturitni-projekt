@@ -18,6 +18,7 @@ public class LevelManager : MonoBehaviour
     public int maxHealth;
     public int baseHealth;
     public bool gameEnded = false;
+    public bool victory = false;
 
     private void Awake()
     {
@@ -37,6 +38,10 @@ public class LevelManager : MonoBehaviour
         if (gameEnded != false)
         {
             totalTime += 0;
+            if (baseHealth > 0)
+            {
+                victory = true;
+            }
         }
         else{
             totalTime += Time.deltaTime;
@@ -44,6 +49,7 @@ public class LevelManager : MonoBehaviour
         if (baseHealth <= 0)
         {
             PlayerDeath();
+            gameEnded = true;
         }
         
     }
@@ -60,6 +66,7 @@ public class LevelManager : MonoBehaviour
     private void PlayerDeath()
     {
         WaveManagerTest.main.ScoreScreen();
+        victory = false;
     }
 
     public void ReturnToMenu()

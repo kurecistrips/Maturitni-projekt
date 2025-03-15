@@ -23,11 +23,18 @@ public class TopUICanvas : MonoBehaviour
         
         time = WaveManagerTest.main.GetTimeUntilNextWave()+1;
 
-        
-        float minutes = Mathf.FloorToInt(time / 60);
-        float seconds = Mathf.FloorToInt(time % 60);
+        if (time > 3600)
+        {
+            timeBetweenWavesText.text = "∞";
+        }
+        else
+        {
+            float minutes = Mathf.FloorToInt(time / 60);
+            float seconds = Mathf.FloorToInt(time % 60);
 
-        timeBetweenWavesText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+            timeBetweenWavesText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        }
+        
 
         
     }

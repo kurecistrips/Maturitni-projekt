@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Plot : MonoBehaviour
 {
+    public static Plot main;
     [SerializeField] private SpriteRenderer sr;
     [SerializeField] private Color hoverColor;
 
@@ -10,9 +11,20 @@ public class Plot : MonoBehaviour
     private GameObject towerGO;
     public Tower tower;
 
+
+    private void Awake()
+    {
+        main = this;
+    }
+
     private void Start()
     {
         startColor = sr.color;
+    }
+
+    private void Update()
+    {
+        
     }
 
     private void OnMouseEnter()

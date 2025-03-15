@@ -120,6 +120,7 @@ public class LoadoutManager : MonoBehaviour
     public void AfterPlacement()
     {
         LevelManager.main.SpendCurrency(selectedTower.costToPlace);
+        isPlacingTower = false;
         Destroy(towerPreview);
         towerPreview = null;
         selectedTower = null;

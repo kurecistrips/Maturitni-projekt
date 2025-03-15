@@ -16,7 +16,6 @@ public class WarningPopUp : MonoBehaviour
     {
         main = this;
     }
-
     private void Start()
     {
         warningGO.SetActive(false);

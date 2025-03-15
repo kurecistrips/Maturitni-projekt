@@ -10,6 +10,7 @@ public class EnemyMovement : MonoBehaviour
 
     private Transform target;
     private int pathIndex = 0;
+    public int pathIndx;
     public bool fromLastWave = false;
 
     public static EnemyMovement main;
@@ -24,6 +25,7 @@ public class EnemyMovement : MonoBehaviour
         if (Vector2.Distance(target.position, transform.position) <= 0.1f)
         {
             pathIndex++;
+            pathIndx = pathIndex;
 
             if (pathIndex == LevelManager.main.path.Length && fromLastWave != true)
             {
@@ -49,6 +51,11 @@ public class EnemyMovement : MonoBehaviour
     {
         Vector2 direction = (target.position - transform.position).normalized;
         rb.velocity = direction * moveSpeed;
+    }
+
+    public Vector2 GetVelocity()
+    {
+        return rb.velocity;
     }
 
 }

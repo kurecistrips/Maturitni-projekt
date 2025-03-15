@@ -5150,12 +5150,13 @@ MonoBehaviour:
   - {fileID: 1051972068}
   - {fileID: 481084230}
   showInGameTimer: 0
-  startingCurrency: 75
+  startingCurrency: 10000
   currency: 0
-  maxBaseHealth: 1000
+  maxBaseHealth: 100
   maxHealth: 0
   baseHealth: 0
   gameEnded: 0
+  victory: 0
 --- !u!4 &787915016
 Transform:
   m_ObjectHideFlags: 0
@@ -5187,6 +5188,7 @@ MonoBehaviour:
   - enemies:
     - enemyPrefab: {fileID: 6464921860472007968, guid: 56759cc4e06068e449267b61de72836b, type: 3}
       count: 4
+      hidden: 1
       timeBetweenSpawns: 0.5
       spawnAfterStartTime: 0
     timeBetweenWaves: 15
@@ -5194,10 +5196,12 @@ MonoBehaviour:
   - enemies:
     - enemyPrefab: {fileID: 6464921860472007968, guid: 56759cc4e06068e449267b61de72836b, type: 3}
       count: 2
+      hidden: 0
       timeBetweenSpawns: 0.25
       spawnAfterStartTime: 1
     - enemyPrefab: {fileID: 6464921860472007968, guid: fe02fe508a7a1494bb511c0e9f03f04b, type: 3}
       count: 3
+      hidden: 0
       timeBetweenSpawns: 0.5
       spawnAfterStartTime: 4
     timeBetweenWaves: 20
@@ -5205,14 +5209,17 @@ MonoBehaviour:
   - enemies:
     - enemyPrefab: {fileID: 6464921860472007968, guid: 56759cc4e06068e449267b61de72836b, type: 3}
       count: 1
+      hidden: 0
       timeBetweenSpawns: 0.1
       spawnAfterStartTime: 0
     - enemyPrefab: {fileID: 6464921860472007968, guid: fe02fe508a7a1494bb511c0e9f03f04b, type: 3}
       count: 2
+      hidden: 0
       timeBetweenSpawns: 0.5
       spawnAfterStartTime: 1
     - enemyPrefab: {fileID: 6464921860472007968, guid: e3edb1f794c99194c9f12e4dcc5e9dde, type: 3}
       count: 3
+      hidden: 0
       timeBetweenSpawns: 0.25
       spawnAfterStartTime: 3
     timeBetweenWaves: 20
@@ -5220,15 +5227,33 @@ MonoBehaviour:
   - enemies:
     - enemyPrefab: {fileID: 6464921860472007968, guid: e3edb1f794c99194c9f12e4dcc5e9dde, type: 3}
       count: 1
+      hidden: 0
       timeBetweenSpawns: 0
       spawnAfterStartTime: 0
     timeBetweenWaves: 15
+    currencyPerWave: 200
+  - enemies:
+    - enemyPrefab: {fileID: 6464921860472007968, guid: 56759cc4e06068e449267b61de72836b, type: 3}
+      count: 20
+      hidden: 0
+      timeBetweenSpawns: 0.1
+      spawnAfterStartTime: 0
+    timeBetweenWaves: 15
+    currencyPerWave: 200
+  - enemies:
+    - enemyPrefab: {fileID: 6464921860472007968, guid: d5d4bbdd9fa7ba24994c8cdf07e7eed6, type: 3}
+      count: 1
+      hidden: 0
+      timeBetweenSpawns: 0
+      spawnAfterStartTime: 0
+    timeBetweenWaves: 1e+14
     currencyPerWave: 200
   spawnPoint: {fileID: 568259075}
   gameOutcome: {fileID: 452620059}
   waveIndex: 1
   waveStartTimeDebug: 0
   waveCommencing: 0
+  getCoins: 100
   showReceiveCoins: 0
 --- !u!114 &787915019
 MonoBehaviour:

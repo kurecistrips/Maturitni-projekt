@@ -13,6 +13,7 @@ public class EnemySpawnInfoTest
 {
     public GameObject enemyPrefab;
     public int count = 1;
+    public bool hidden = false;
     public float timeBetweenSpawns = 0.5f;
     public float spawnAfterStartTime = 0f;
 }
@@ -47,7 +48,7 @@ public class WaveManagerTest : MonoBehaviour
     private int enemiesLeftToSpawn;
     private int enemiesAlive;
     public bool waveCommencing = false;
-    private int getCoins = 100;
+    [SerializeField] private int getCoins = 100;
     public int showReceiveCoins;
 
     private bool currencyGiven = false;
@@ -106,7 +107,6 @@ public class WaveManagerTest : MonoBehaviour
             showSkipPopUp();
             
         }
-        
     }
 
     public void showSkipPopUp()
@@ -213,7 +213,8 @@ public class WaveManagerTest : MonoBehaviour
             for (int j = 0; j < enemyInfo.count; j++)
             {
                 Instantiate(enemyInfo.enemyPrefab, spawnPoint.position, Quaternion.identity);
-
+                if (enemyInfo.hidden == true) EnemyHealth.main.isHidden = true;
+                
                 enemiesLeftToSpawn--;
                 enemiesAlive++;
 

@@ -822,9 +822,9 @@ GameObject:
   m_Component:
   - component: {fileID: 359274409780690241}
   - component: {fileID: 7220425690895169736}
-  - component: {fileID: 5174995514161146717}
+  - component: {fileID: 6861034865610586460}
   m_Layer: 9
-  m_Name: Test Tower
+  m_Name: Test Rocket Tower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -860,42 +860,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b4a6219d8210d44cb802c5cf526d1e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TowerName: Test Tower
+  TowerName: Test Projectile Tower
   level: 1
-  costToPlace: 100
+  costToPlace: 200
   totalCost: 0
-  attackRange: 2
+  attackRange: 3
   attackSpeed: 1
-  damage: 1
-  hiddenDetection: 0
+  damage: 10
+  explosionRadius: 3
+  projectileSpeed: 7.5
+  projectilePrefab: {fileID: 0}
+  hiddenDetection: 1
   baseRenderer: {fileID: 3429443560712021479}
   turretRendere: {fileID: 2883237879915664009}
-  towerImage: {fileID: 21300000, guid: 75436e0bc13cb2149a15f26f5fc20419, type: 3}
+  towerImage: {fileID: 21300000, guid: 1d894a8609275274fa4deb9a5fc5b705, type: 3}
   lvlText: {fileID: 645299448035511244}
   towerUI: {fileID: 2081365357352962079}
-  rangeCircle: {fileID: 0}
   upgrades:
   - level: 2
-    cost: 50
+    cost: 100
     newRange: 3
     newAttackSpeed: 2
-    newDamage: 2
+    newDamage: 20
     newBaseSprite: {fileID: 0}
     newTurretSprite: {fileID: 0}
     newPorjectilePrefab: {fileID: 0}
-    newProjectileSpeed: 0
-    hiddenDetection: 0
+    newProjectileSpeed: 8
+    newExplosionRadius: 3.5
+    hiddenDetection: 1
   - level: 3
-    cost: 100
+    cost: 250
     newRange: 4
     newAttackSpeed: 3
-    newDamage: 4
+    newDamage: 50
     newBaseSprite: {fileID: 0}
     newTurretSprite: {fileID: 0}
     newPorjectilePrefab: {fileID: 0}
-    newProjectileSpeed: 0
+    newProjectileSpeed: 10
+    newExplosionRadius: 5
     hiddenDetection: 1
---- !u!114 &5174995514161146717
+--- !u!114 &6861034865610586460
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -904,15 +908,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 8907402369031678814}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 474337890dfadf6488c2a25890b95333, type: 3}
+  m_Script: {fileID: 11500000, guid: c316aebd969af75408b49019b5110ec4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  firingPoint: {fileID: 4132700695299013602}
+  rotatingPoint: {fileID: 1692799428711529759}
+  projectilePrefab: {fileID: 1544586613324308168, guid: e9f9b1d4492e72445839cbc47974c7c2, type: 3}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
-  firingPoint: {fileID: 4132700695299013602}
-  rotatingPoint: {fileID: 1692799428711529759}
   targetsInRange: []
   currentTarget: {fileID: 0}
   currentTargetingStyle: 0
   tower: {fileID: 7220425690895169736}
+  projectileSpeed: 0

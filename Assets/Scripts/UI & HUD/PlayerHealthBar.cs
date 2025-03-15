@@ -10,12 +10,18 @@ public class PlayerHealthBar : MonoBehaviour
     public Image playerHealtBarGO;
     private float lerpSpeed;
 
+    private float baseHealth;
+    private float maxHealth;
+
     private void OnGUI()
     {
-        playerHealthBarText.text = LevelManager.main.baseHealth.ToString() + "/" + LevelManager.main.maxHealth;
+        playerHealthBarText.text = baseHealth.ToString() + "/" + maxHealth;
     }
     private void Update()
     {
+        baseHealth = LevelManager.main.baseHealth;
+        maxHealth = LevelManager.main.maxHealth;
+        
         lerpSpeed = 3f * Time.deltaTime;
 
         HealthBarFiller();
@@ -24,12 +30,12 @@ public class PlayerHealthBar : MonoBehaviour
     
     void HealthBarFiller()
     {
-        playerHealtBarGO.fillAmount = Mathf.Lerp(playerHealtBarGO.fillAmount, LevelManager.main.maxHealth, lerpSpeed);
+        playerHealtBarGO.fillAmount = Mathf.Lerp(playerHealtBarGO.fillAmount, baseHealth / maxHealth, lerpSpeed);
     }
     
     void ColorChanger()
     {
-        Color healthColor = Color.Lerp(Color.red, Color.green, (LevelManager.main.baseHealth / LevelManager.main.maxHealth));
+        Color healthColor = Color.Lerp(Color.red, Color.green, (baseHealth / maxHealth));
 
         playerHealtBarGO.color = healthColor;
     }
