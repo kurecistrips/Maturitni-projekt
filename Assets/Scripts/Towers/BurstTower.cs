@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,63 +5,70 @@ using Enums;
 using UnityEditor;
 using UnityEngine;
 
-public class HitScanTower : MonoBehaviour
+public class BurstTower : MonoBehaviour
 {
     public LayerMask enemyLayer;
     public Transform firingPoint;
     public Transform rotatingPoint;
-    private float nextAttackTime = 0f;
 
     [SerializeField] private List<EnemyHealth> targetsInRange = new();
     [SerializeField] private EnemyHealth currentTarget;
     [SerializeField] private TargetingStyle currentTargetingStyle = TargetingStyle.First;
     private TargetingStyle _previousTargetingStyle;
     private float smoothTime = 0.1f;
-
     [SerializeField] private Tower tower;
     private float detectionRadius;
+    private int burstFireNum;
     private float attackSpeed;
+    private bool isShooting;
+    private float cooldownAfterBurst = 1f;
 
     private void Awake()
     {
         _previousTargetingStyle = currentTargetingStyle;
-        
     }
 
     private void Update()
     {
         detectionRadius = tower.attackRange;
+        burstFireNum = tower.timesToShoot;
         attackSpeed = tower.attackSpeed;
         DetectEnemies();
         GetCurrentTarget();
-
+        
         if (currentTarget == null) return;
-        RotateTowardsTarget();   
+        RotateTowardsTarget();
         if (_previousTargetingStyle != currentTargetingStyle)
         {
             HandleTargetStyleSwitch();
         }
-
-        if (nextAttackTime <= 0f)
+        if (!isShooting)
         {
-            Attack();
-            nextAttackTime = 1f / attackSpeed;
-        }
-        nextAttackTime -= Time.deltaTime;
-    } 
-    public void Attack()
-    {
-        
-
-        Vector2 direction = (currentTarget.transform.position - firingPoint.position).normalized;
-        RaycastHit2D hit = Physics2D.Raycast(firingPoint.position, direction, Tower.main.attackSpeed, enemyLayer);
-        if (hit.collider != null && hit.collider.CompareTag("Enemy"))
-        {
-            EnemyHealth enemy = hit.collider.GetComponent<EnemyHealth>();
-            
-            enemy.TakeDamage(Tower.main.damage); 
+            StartCoroutine(Attack(burstFireNum));
+            isShooting = true;
         }
     }
+
+    IEnumerator Attack(int TimesToShoot)
+    {
+        for (int timesShot = 1; timesShot <= TimesToShoot; timesShot++)
+        {
+            Vector2 direction = (currentTarget.transform.position - firingPoint.position).normalized;
+            RaycastHit2D hit = Physics2D.Raycast(firingPoint.position, direction, detectionRadius, enemyLayer);
+        
+            if (hit.collider != null && hit.collider.CompareTag("Enemy"))
+            {
+                EnemyHealth enemy = hit.collider.GetComponent<EnemyHealth>();
+                enemy.TakeDamage(tower.damage);
+            }
+
+            yield return new WaitForSeconds(1f / attackSpeed);
+        }
+        yield return new WaitForSeconds(cooldownAfterBurst);
+
+        isShooting = false;
+    }
+
     private void RotateTowardsTarget()
     {
 
@@ -73,13 +79,6 @@ public class HitScanTower : MonoBehaviour
 
         rotatingPoint.rotation = Quaternion.Slerp(rotatingPoint.rotation, targetRotation, smoothTime);
     }
-
-    private void OnDrawGizmos() //debug testing
-    {
-        Handles.color = Color.yellow;
-        Handles.DrawWireDisc(transform.position, transform.forward, Tower.main.attackRange);
-    }
-
     private void DetectEnemies()
     {
         targetsInRange.Clear();
@@ -94,7 +93,6 @@ public class HitScanTower : MonoBehaviour
             }
         }
     }
-
 
     private void GetCurrentTarget()
     {
@@ -132,6 +130,5 @@ public class HitScanTower : MonoBehaviour
         _previousTargetingStyle = currentTargetingStyle;
         GetCurrentTarget();
     }
+
 }
-
-

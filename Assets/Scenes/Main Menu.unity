@@ -648,7 +648,7 @@ PrefabInstance:
     - target: {fileID: 1826604351262961186, guid: d7081bee0bb11b842bcf151fa45854e6, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8907402369031678814, guid: 4575790c993b4ca4ba0f0c5f73638162, type: 3}
     - target: {fileID: 1859562469526626455, guid: d7081bee0bb11b842bcf151fa45854e6, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -675,7 +675,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1960879990146526447, guid: d7081bee0bb11b842bcf151fa45854e6, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2009848080896904411, guid: d7081bee0bb11b842bcf151fa45854e6, type: 3}
       propertyPath: m_AnchorMax.y
@@ -808,7 +808,7 @@ PrefabInstance:
     - target: {fileID: 3133997853210318685, guid: d7081bee0bb11b842bcf151fa45854e6, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
-      objectReference: {fileID: 8907402369031678814, guid: 0bf8ffca1b34edb4699aa381d056761b, type: 3}
+      objectReference: {fileID: 8907402369031678814, guid: 3da2a6160fe16f14cb92252cb260d03a, type: 3}
     - target: {fileID: 3178907069001939366, guid: d7081bee0bb11b842bcf151fa45854e6, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -944,7 +944,7 @@ PrefabInstance:
     - target: {fileID: 4143240920832748221, guid: d7081bee0bb11b842bcf151fa45854e6, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 118e7ceebed8160478076dce84d33264, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 4143460851800942726, guid: d7081bee0bb11b842bcf151fa45854e6, type: 3}
       propertyPath: m_Color.a
       value: 0.24705882
@@ -1123,6 +1123,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6346080644895578227, guid: d7081bee0bb11b842bcf151fa45854e6, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6521636326539678379, guid: d7081bee0bb11b842bcf151fa45854e6, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6862040798447372008, guid: d7081bee0bb11b842bcf151fa45854e6, type: 3}
@@ -1481,9 +1485,13 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
       objectReference: {fileID: 8907402369031678814, guid: 0e30c4966afc7694a99b1c1d1e881544, type: 3}
+    - target: {fileID: 9155085625247094892, guid: d7081bee0bb11b842bcf151fa45854e6, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 9204292914587949914, guid: d7081bee0bb11b842bcf151fa45854e6, type: 3}
       propertyPath: availableTowers.Array.size
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 9204292914587949914, guid: d7081bee0bb11b842bcf151fa45854e6, type: 3}
       propertyPath: availableTowers.Array.data[1]
@@ -1496,7 +1504,11 @@ PrefabInstance:
     - target: {fileID: 9204292914587949914, guid: d7081bee0bb11b842bcf151fa45854e6, type: 3}
       propertyPath: availableTowers.Array.data[3]
       value: 
-      objectReference: {fileID: 8907402369031678814, guid: 0bf8ffca1b34edb4699aa381d056761b, type: 3}
+      objectReference: {fileID: 8907402369031678814, guid: 3da2a6160fe16f14cb92252cb260d03a, type: 3}
+    - target: {fileID: 9204292914587949914, guid: d7081bee0bb11b842bcf151fa45854e6, type: 3}
+      propertyPath: availableTowers.Array.data[4]
+      value: 
+      objectReference: {fileID: 8907402369031678814, guid: 4575790c993b4ca4ba0f0c5f73638162, type: 3}
     - target: {fileID: 9204292914587949914, guid: d7081bee0bb11b842bcf151fa45854e6, type: 3}
       propertyPath: towerButtons.Array.data[0].button
       value: 

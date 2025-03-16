@@ -603,6 +603,7 @@ MonoBehaviour:
   enemyName: Red
   currencyWorth: 25
   isHidden: 0
+  isBoss: 0
 --- !u!114 &3565852144678169939
 MonoBehaviour:
   m_ObjectHideFlags: 0

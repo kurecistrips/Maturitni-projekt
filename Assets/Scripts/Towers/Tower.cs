@@ -1,4 +1,5 @@
 using TMPro;
+using Unity.VisualScripting.ReorderableList.Element_Adder_Menu;
 using UnityEngine;
 
 public class Tower : MonoBehaviour
@@ -14,6 +15,8 @@ public class Tower : MonoBehaviour
     public float explosionRadius; //projectile towers only
     public float projectileSpeed; //projectile towers only
     public Sprite projectilePrefab; //projectile towers only
+    public int moneyPerWave;
+    public int timesToShoot;
     public bool hiddenDetection;
     private bool isDisplaying = false;
 
@@ -32,10 +35,17 @@ public class Tower : MonoBehaviour
 
     private void Start()
     {
-        baseRenderer = transform.Find("Base").GetComponent<SpriteRenderer>();
-        turretRendere = transform.Find("Rotating Point/Turret").GetComponent<SpriteRenderer>();
         lvlText.text = $"Level: {level}";
         totalCost += costToPlace;
+        baseRenderer = transform.Find("Base").GetComponent<SpriteRenderer>();
+        if (turretRendere == null)
+        {
+            return;
+        }
+        else
+        {
+            turretRendere = transform.Find("Rotating Point/Turret").GetComponent<SpriteRenderer>();
+        }
     }
 
     public void Upgrade()
@@ -50,6 +60,8 @@ public class Tower : MonoBehaviour
                 attackSpeed = upgrade.newAttackSpeed;
                 damage = upgrade.newDamage;
                 hiddenDetection = upgrade.hiddenDetection;
+                moneyPerWave = upgrade.moneyPerWave;
+                timesToShoot = upgrade.timesToShoot;
 
                 totalCost += upgrade.cost;
 
