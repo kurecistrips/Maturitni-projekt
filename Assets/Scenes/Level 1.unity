@@ -5287,7 +5287,7 @@ MonoBehaviour:
     buttonImage: {fileID: 2079664213}
     placementCost: {fileID: 1142120713}
   selectedTowers: []
-  emptySlotSprite: {fileID: 0}
+  emptySlotSprite: {fileID: 21300000, guid: 91d1dc1ebac51b340a03d4b1dc078e8b, type: 3}
 --- !u!1 &799253049
 GameObject:
   m_ObjectHideFlags: 0

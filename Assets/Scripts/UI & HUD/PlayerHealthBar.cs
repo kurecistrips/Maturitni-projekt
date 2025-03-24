@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -28,12 +26,12 @@ public class PlayerHealthBar : MonoBehaviour
         ColorChanger();
     }
     
-    void HealthBarFiller()
+    private void HealthBarFiller()
     {
         playerHealtBarGO.fillAmount = Mathf.Lerp(playerHealtBarGO.fillAmount, baseHealth / maxHealth, lerpSpeed);
     }
     
-    void ColorChanger()
+    private void ColorChanger()
     {
         Color healthColor = Color.Lerp(Color.red, Color.green, (baseHealth / maxHealth));
 

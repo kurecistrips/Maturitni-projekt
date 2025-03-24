@@ -99,7 +99,7 @@ public class LoadoutManager : MonoBehaviour
         else{
             needed = selectedTower.costToPlace - LevelManager.main.currency;
             Debug.Log($"Not enough money {needed}");
-            WarningPopUp.main.PopUp(needed);
+            WarningPopUp.main.PopUpWarning(needed);
             selectedTower = null;
         }
         

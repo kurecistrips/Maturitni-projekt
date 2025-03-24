@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -19,4 +17,5 @@ public class TowerUpgrades
     public int timesToShoot; // Only for burst tower
     public float newExplosionRadius;
     public bool hiddenDetection;
+    public bool stunResistance;
 }

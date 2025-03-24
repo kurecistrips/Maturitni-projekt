@@ -1,12 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private float moveSpeed = 2f;
+
+    private float baseSpeed;
 
     private Transform target;
     private int pathIndex = 0;
@@ -17,6 +16,7 @@ public class EnemyMovement : MonoBehaviour
 
     private void Start()
     {
+        baseSpeed = moveSpeed;
         target = LevelManager.main.path[pathIndex];
     }
 
@@ -56,6 +56,15 @@ public class EnemyMovement : MonoBehaviour
     public Vector2 GetVelocity()
     {
         return rb.velocity;
+    }
+
+    public void Freeze(float stop)
+    {
+        moveSpeed = stop;
+    }
+    public void ResetSpeed()
+    {
+        moveSpeed = baseSpeed;
     }
 
 }

@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class TopUICanvas : MonoBehaviour
@@ -10,9 +7,9 @@ public class TopUICanvas : MonoBehaviour
     public TextMeshProUGUI timeBetweenWavesText;
     public TextMeshProUGUI waveCounter;
     
-    float time;
+    private float time;
 
-    void Start()
+    private void Start()
     {
         //time = WaveManager.main.waves[waveIndex].timeBetweenWaves;
     }

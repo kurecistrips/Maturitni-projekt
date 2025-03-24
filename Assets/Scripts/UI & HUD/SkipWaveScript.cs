@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,11 +11,11 @@ public class SkipWaveScript : MonoBehaviour
 
     public static SkipWaveScript main;
 
-    void Awake()
+    private void Awake()
     {
         main = this;
     }
-    void Start()
+    private void Start()
     {
         skipPopUp.SetActive(false);
     }

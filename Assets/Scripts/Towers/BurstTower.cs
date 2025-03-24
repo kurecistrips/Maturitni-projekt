@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Enums;
-using UnityEditor;
 using UnityEngine;
 
 public class BurstTower : MonoBehaviour
@@ -27,6 +26,10 @@ public class BurstTower : MonoBehaviour
     {
         _previousTargetingStyle = currentTargetingStyle;
     }
+    private void Start()
+    {
+        tower.targetingText.text = $"Target: {currentTargetingStyle}";
+    }
 
     private void Update()
     {
@@ -37,19 +40,22 @@ public class BurstTower : MonoBehaviour
         GetCurrentTarget();
         
         if (currentTarget == null) return;
-        RotateTowardsTarget();
-        if (_previousTargetingStyle != currentTargetingStyle)
+        if (!tower.isStunned)
         {
-            HandleTargetStyleSwitch();
-        }
-        if (!isShooting)
-        {
-            StartCoroutine(Attack(burstFireNum));
-            isShooting = true;
-        }
+            RotateTowardsTarget();
+            if (_previousTargetingStyle != currentTargetingStyle)
+            {
+                HandleTargetStyleSwitch();
+            }
+            if (!isShooting)
+            {
+                StartCoroutine(Attack(burstFireNum));
+                isShooting = true;
+            }
+        } 
     }
 
-    IEnumerator Attack(int TimesToShoot)
+    private IEnumerator Attack(int TimesToShoot)
     {
         for (int timesShot = 1; timesShot <= TimesToShoot; timesShot++)
         {
@@ -129,6 +135,20 @@ public class BurstTower : MonoBehaviour
     {
         _previousTargetingStyle = currentTargetingStyle;
         GetCurrentTarget();
+    }
+
+    public void SwitchTargetingStyle()
+    {
+        currentTargetingStyle++;
+
+        if ((int)currentTargetingStyle >= System.Enum.GetValues(typeof(TargetingStyle)).Length)
+        {
+            currentTargetingStyle = 0;
+        }
+
+        tower.targetingText.text = $"Target: {currentTargetingStyle}";
+
+        HandleTargetStyleSwitch();
     }
 
 }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -11,12 +9,12 @@ public class HideTowerSelection : MonoBehaviour
     public TextMeshProUGUI btnTxt;
     private bool isON = true;
 
-    void Start()
+    private void Start()
     {
         uiTowerSlotBtn.onClick.AddListener(PanelOnClick);
         btnTxt.text = "v";
     }
-    void PanelOnClick()
+    private void PanelOnClick()
     {
         if (isON == true)
         {

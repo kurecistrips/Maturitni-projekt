@@ -1,9 +1,6 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Enums;
-using UnityEditor;
 using UnityEngine;
 
 public class ProjectileTower : MonoBehaviour
@@ -29,6 +26,11 @@ public class ProjectileTower : MonoBehaviour
         _previousTargetingStyle = currentTargetingStyle;   
     }
 
+    private void Start()
+    {
+        tower.targetingText.text = $"Target: {currentTargetingStyle}";
+    }
+
     private void Update()
     {
         detectionRadius = tower.attackRange;
@@ -36,18 +38,22 @@ public class ProjectileTower : MonoBehaviour
         GetCurrentTarget();
 
         if (currentTarget == null) return;
-        RotateTowardsTarget();
-        if (_previousTargetingStyle != currentTargetingStyle)
+        if (!tower.isStunned)
         {
-            HandleTargetStyleSwitch();
-        }
+            RotateTowardsTarget();
+            if (_previousTargetingStyle != currentTargetingStyle)
+            {
+                HandleTargetStyleSwitch();
+            }
 
-        if (nextAttackTime <= 0f)
-        {
-            Attack();
-            nextAttackTime = 1f / tower.attackSpeed;
+            if (nextAttackTime <= 0f)
+            {
+                Attack();
+                nextAttackTime = 1f / tower.attackSpeed;
+            }
+            nextAttackTime -= Time.deltaTime;
         }
-        nextAttackTime -= Time.deltaTime;
+        
     }
 
     private void DetectEnemies()
@@ -125,6 +131,20 @@ public class ProjectileTower : MonoBehaviour
     {
         _previousTargetingStyle = currentTargetingStyle;
         GetCurrentTarget();
+    }
+    
+    public void SwitchTargetingStyle()
+    {
+        currentTargetingStyle++;
+
+        if ((int)currentTargetingStyle >= System.Enum.GetValues(typeof(TargetingStyle)).Length)
+        {
+            currentTargetingStyle = 0;
+        }
+
+        tower.targetingText.text = $"Target: {currentTargetingStyle}";
+
+        HandleTargetStyleSwitch();
     }
 }
 

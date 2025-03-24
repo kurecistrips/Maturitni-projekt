@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -33,12 +31,14 @@ public class WarningPopUp : MonoBehaviour
             counter += 0;
         }
     }
-    public void PopUp(int amount){
+    public void PopUpWarning(int amount){
         clicked = true;
         counter = timeSinceClick;
         warningGO.SetActive(true);
         warningText.text = $"Not enough money: {amount}$ needed";
         
     }
+
+    
 
 }

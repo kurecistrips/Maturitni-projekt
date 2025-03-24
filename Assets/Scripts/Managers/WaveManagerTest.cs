@@ -1,11 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Runtime.Serialization;
-using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
 
 [System.Serializable]
 
@@ -50,6 +46,9 @@ public class WaveManagerTest : MonoBehaviour
     public bool waveCommencing = false;
     [SerializeField] private int getCoins = 100;
     public int showReceiveCoins;
+    private float recievedCoins;
+    private float maxAmountOfWaves;
+    private bool rewardGiven = false;
 
     private bool currencyGiven = false;
     private bool skipBool = false;
@@ -63,6 +62,7 @@ public class WaveManagerTest : MonoBehaviour
     private void Start()
     {
         waveStartTimeDebug = Time.time;
+        maxAmountOfWaves = waves.Count;
     }
 
     private void Update()
@@ -87,7 +87,7 @@ public class WaveManagerTest : MonoBehaviour
                     waveIndex++;
                     
                 }
-                else if (waveTimeLength <= 0 || enemiesAlive == 0 && enemiesLeftToSpawn <= 0 && skipBool == false)
+                else if (waveTimeLength <= 0 || enemiesAlive == 0 && enemiesLeftToSpawn <= 0 && skipBool == false && LevelManager.main.gameEnded == false)
                 {
                     
                     Intermission();
@@ -153,6 +153,7 @@ public class WaveManagerTest : MonoBehaviour
         {
             LevelManager.main.IncreaseCurrency(waves[waveIndex-2].currencyPerWave);
             currencyGiven = true;
+            BonusMoneyPopUp.main.MoneyPerWave(waves[waveIndex-2].currencyPerWave);
         }
         
         enemiesAlive = 0;
@@ -196,7 +197,14 @@ public class WaveManagerTest : MonoBehaviour
     {
         gameOutcome.Activate();
         waveCommencing = false;
-        showReceiveCoins = getCoins;
+        recievedCoins = getCoins * (currentWaveIndex / maxAmountOfWaves);
+        showReceiveCoins = (int)recievedCoins;
+        
+        if (!rewardGiven)
+        {
+            CurrencyManager.main.AddCurrency((int)recievedCoins);
+            rewardGiven = true;
+        }
         LevelManager.main.gameEnded = true;
         
     }

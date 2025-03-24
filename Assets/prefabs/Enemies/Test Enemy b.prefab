@@ -389,11 +389,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34f186f2813f0df4fa03faaf64be977d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 873337115678193076}
   maxHealth: 20
   healthInfo: 0
   enemyName: Blue
   currencyWorth: 50
+  hiddenAlpha: 0.5
   isHidden: 0
+  isBoss: 0
 --- !u!114 &-4881532586504751424
 MonoBehaviour:
   m_ObjectHideFlags: 0

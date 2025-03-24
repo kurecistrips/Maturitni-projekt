@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Enums;
@@ -28,6 +26,10 @@ public class HitScanTower : MonoBehaviour
         _previousTargetingStyle = currentTargetingStyle;
         
     }
+    private void Start()
+    {
+        tower.targetingText.text = $"Target: {currentTargetingStyle}";
+    }
 
     private void Update()
     {
@@ -37,18 +39,22 @@ public class HitScanTower : MonoBehaviour
         GetCurrentTarget();
 
         if (currentTarget == null) return;
-        RotateTowardsTarget();   
-        if (_previousTargetingStyle != currentTargetingStyle)
+        if (!tower.isStunned)
         {
-            HandleTargetStyleSwitch();
-        }
+            RotateTowardsTarget();   
+            if (_previousTargetingStyle != currentTargetingStyle)
+            {
+                HandleTargetStyleSwitch();
+            }
 
-        if (nextAttackTime <= 0f)
-        {
-            Attack();
-            nextAttackTime = 1f / attackSpeed;
+            if (nextAttackTime <= 0f)
+            {
+                Attack();
+                nextAttackTime = 1f / attackSpeed;
+            }
+            nextAttackTime -= Time.deltaTime;
         }
-        nextAttackTime -= Time.deltaTime;
+        
     } 
     public void Attack()
     {
@@ -74,11 +80,11 @@ public class HitScanTower : MonoBehaviour
         rotatingPoint.rotation = Quaternion.Slerp(rotatingPoint.rotation, targetRotation, smoothTime);
     }
 
-    private void OnDrawGizmos() //debug testing
+    /*private void OnDrawGizmos() //debug testing
     {
         Handles.color = Color.yellow;
         Handles.DrawWireDisc(transform.position, transform.forward, Tower.main.attackRange);
-    }
+    }*/
 
     private void DetectEnemies()
     {
@@ -131,6 +137,20 @@ public class HitScanTower : MonoBehaviour
     {
         _previousTargetingStyle = currentTargetingStyle;
         GetCurrentTarget();
+    }
+
+    public void SwitchTargetingStyle()
+    {
+        currentTargetingStyle++;
+
+        if ((int)currentTargetingStyle >= System.Enum.GetValues(typeof(TargetingStyle)).Length)
+        {
+            currentTargetingStyle = 0;
+        }
+
+        tower.targetingText.text = $"Target: {currentTargetingStyle}";
+
+        HandleTargetStyleSwitch();
     }
 }
 
