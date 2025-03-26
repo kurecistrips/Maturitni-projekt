@@ -45,6 +45,7 @@ public class WaveManagerTest : MonoBehaviour
     private int enemiesAlive;
     public bool waveCommencing = false;
     [SerializeField] private int getCoins = 100;
+    private float victoryBonus = 0.5f;
     public int showReceiveCoins;
     private float recievedCoins;
     private float maxAmountOfWaves;
@@ -112,7 +113,7 @@ public class WaveManagerTest : MonoBehaviour
     public void showSkipPopUp()
     {
         
-        if (waveTimeLength <= waves[waveIndex-2].timeBetweenWaves * 0.90 && waveCommencing == true && prepBool == false && currentWaveIndex <= waves.Count-1 && SkipWaveScript.main.veoted == false)
+        if (waveTimeLength <= waves[waveIndex-2].timeBetweenWaves * 0.90 && waveCommencing == true && prepBool == false && currentWaveIndex <= waves.Count-1 && SkipWaveScript.main.vetoed == false)
         {
             SkipWaveScript.main.skipPopUp.SetActive(true);
             
@@ -160,7 +161,7 @@ public class WaveManagerTest : MonoBehaviour
         intermissionTime -= Time.deltaTime;
         if (intermissionTime <= 0)
         {
-            SkipWaveScript.main.veoted = false;
+            SkipWaveScript.main.vetoed = false;
             skipBool = false;
             waveIndex++;
             waveTimeLength = waves[currentWaveIndex].timeBetweenWaves;
@@ -202,6 +203,11 @@ public class WaveManagerTest : MonoBehaviour
         
         if (!rewardGiven)
         {
+            if (LevelManager.main.victory == true)
+            {
+                recievedCoins += recievedCoins*victoryBonus;
+                
+            }
             CurrencyManager.main.AddCurrency((int)recievedCoins);
             rewardGiven = true;
         }

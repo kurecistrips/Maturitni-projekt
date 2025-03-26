@@ -62,6 +62,7 @@ public class Tower : MonoBehaviour
         if (stunResistance == true && isStunned == true)
         {
             isStunned = false;
+            stunDuration = 0;
         }
 
         if (stunDuration > 0)

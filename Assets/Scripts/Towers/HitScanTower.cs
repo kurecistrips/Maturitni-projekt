@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Enums;
-using UnityEditor;
 using UnityEngine;
 
 public class HitScanTower : MonoBehaviour
@@ -18,6 +17,7 @@ public class HitScanTower : MonoBehaviour
     private float smoothTime = 0.1f;
 
     [SerializeField] private Tower tower;
+    [SerializeField] private ParticleSystem muzzleFlash;
     private float detectionRadius;
     private float attackSpeed;
 
@@ -52,21 +52,23 @@ public class HitScanTower : MonoBehaviour
                 Attack();
                 nextAttackTime = 1f / attackSpeed;
             }
-            nextAttackTime -= Time.deltaTime;
+            
         }
-        
+        nextAttackTime -= Time.deltaTime;  
     } 
+    
     public void Attack()
     {
         
 
         Vector2 direction = (currentTarget.transform.position - firingPoint.position).normalized;
-        RaycastHit2D hit = Physics2D.Raycast(firingPoint.position, direction, Tower.main.attackSpeed, enemyLayer);
+        RaycastHit2D hit = Physics2D.Raycast(firingPoint.position, direction, detectionRadius, enemyLayer);
         if (hit.collider != null && hit.collider.CompareTag("Enemy"))
         {
             EnemyHealth enemy = hit.collider.GetComponent<EnemyHealth>();
+            muzzleFlash.Play();
+            enemy.TakeDamage(tower.damage); 
             
-            enemy.TakeDamage(Tower.main.damage); 
         }
     }
     private void RotateTowardsTarget()

@@ -7,7 +7,7 @@ public class SkipWaveScript : MonoBehaviour
     public Button voteYes;
     public Button voteNo;
 
-    public bool veoted = false;
+    public bool vetoed = false;
 
     public static SkipWaveScript main;
 
@@ -26,7 +26,7 @@ public class SkipWaveScript : MonoBehaviour
     }
     public void OnClickVeto()
     {
-        veoted = true;
+        vetoed = true;
         skipPopUp.SetActive(false);
     }
 

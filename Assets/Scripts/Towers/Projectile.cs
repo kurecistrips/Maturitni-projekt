@@ -7,6 +7,8 @@ public class Projectile : MonoBehaviour
     public LayerMask enemyLayer;
     [SerializeField] private Rigidbody2D rb;
     //[SerializeField] private CircleCollider2D cirCollider2D;
+    [SerializeField] private GameObject explosion;
+    
     private int damage;
     private Transform target;
 
@@ -54,6 +56,7 @@ public class Projectile : MonoBehaviour
     {
         if (other.transform == target)
         {
+            Instantiate(explosion.gameObject, transform.position, Quaternion.identity);
             Explode();
         }
     }
