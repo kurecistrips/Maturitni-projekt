@@ -103,7 +103,7 @@ public class BurstTower : MonoBehaviour
         foreach (var collider in detectedEnemies)
         {
             EnemyHealth enemy = collider.GetComponent<EnemyHealth>();
-            if (enemy != null && (!enemy.isHidden || (enemy.isHidden && tower.hiddenDetection)))
+            if (enemy != null && (!enemy.isHidden || (enemy.isHidden && tower.hiddenDetection)) && tower.isPlaced == true)
             {
                 targetsInRange.Add(enemy);
             }

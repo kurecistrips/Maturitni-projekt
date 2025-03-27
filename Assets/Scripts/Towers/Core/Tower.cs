@@ -22,6 +22,7 @@ public class Tower : MonoBehaviour
 
     public bool isStunned = false;
     private float stunDuration;
+    public bool isPlaced = false;
 
     public SpriteRenderer baseRenderer;
     public SpriteRenderer turretRendere;
@@ -52,8 +53,6 @@ public class Tower : MonoBehaviour
         {
             turretRendere = transform.Find("Rotating Point/Turret").GetComponent<SpriteRenderer>();
         }
-        
-        
         
     }
 
@@ -88,6 +87,13 @@ public class Tower : MonoBehaviour
         
 
     }
+
+    public bool Placed(bool placed)
+    {
+        isPlaced = placed;
+        return isPlaced;
+    }
+    
 
     public void Upgrade()
     {

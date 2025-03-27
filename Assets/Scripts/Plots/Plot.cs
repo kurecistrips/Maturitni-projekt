@@ -9,6 +9,7 @@ public class Plot : MonoBehaviour
     private Color startColor;
     private GameObject towerGO;
     public Tower tower;
+    
 
 
     private void Awake()
@@ -48,6 +49,7 @@ public class Plot : MonoBehaviour
         LoadoutManager.main.AfterPlacement();
         towerGO = Instantiate(towerToBuild.gameObject, transform.position, Quaternion.identity);
         tower = towerGO.GetComponent<Tower>();
+        tower.Placed(true);
 
         Debug.Log($"{towerToBuild} {transform.position}");
     }
