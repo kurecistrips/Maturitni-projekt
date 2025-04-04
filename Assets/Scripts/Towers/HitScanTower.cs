@@ -5,81 +5,81 @@ using UnityEngine;
 
 public class HitScanTower : MonoBehaviour
 {
-    public LayerMask enemyLayer;
-    public Transform firingPoint;
-    public Transform rotatingPoint;
-    private float nextAttackTime = 0f;
+    public LayerMask enemyLayer; //vrstva pro detekci nepřátel
+    public Transform firingPoint; //bod, ze kterého věž střílí
+    public Transform rotatingPoint; //bod na otáčení věžě
+    private float nextAttackTime = 0f; //časovač pro další útok
 
-    [SerializeField] private List<EnemyHealth> targetsInRange = new();
-    [SerializeField] private EnemyHealth currentTarget;
-    [SerializeField] private TargetingStyle currentTargetingStyle = TargetingStyle.First;
-    private TargetingStyle _previousTargetingStyle;
-    private float smoothTime = 0.1f;
+    [SerializeField] private List<EnemyHealth> targetsInRange = new(); //seznam nepřátelských jednotek v dosahu
+    [SerializeField] private EnemyHealth currentTarget; //aktuálně zaměřená nepřátelská jednotka
+    [SerializeField] private TargetingStyle currentTargetingStyle = TargetingStyle.First; //aktuální styl zaměřování
+    private TargetingStyle _previousTargetingStyle; //předchozí styl zaměřování
+    private float smoothTime = 0.1f; //rychlost otáčení
 
-    [SerializeField] private Tower tower;
-    [SerializeField] private ParticleSystem muzzleFlash;
-    private float detectionRadius;
-    private float attackSpeed;
+    [SerializeField] private Tower tower; //odkaz na věž
+    [SerializeField] private ParticleSystem muzzleFlash; //efekt výstřelu
+    private float detectionRadius; //rádius detekci nepřátelských jednotek
+    private float attackSpeed; //rychlost útoku
 
     private void Awake()
     {
-        _previousTargetingStyle = currentTargetingStyle;
+        _previousTargetingStyle = currentTargetingStyle; //uložení počátečního stylu zaměřování
         
     }
     private void Start()
     {
-        tower.targetingText.text = $"Target: {currentTargetingStyle}";
+        tower.targetingText.text = $"Target: {currentTargetingStyle}"; //nastavení UI textu zobrazující aktuální styl zaměřování
     }
 
     private void Update()
     {
         detectionRadius = tower.attackRange;
         attackSpeed = tower.attackSpeed;
-        DetectEnemies();
-        GetCurrentTarget();
+        DetectEnemies(); //detelce nepřátel v dosahu
+        GetCurrentTarget(); //výběr aktuálního cíle
 
         if (currentTarget == null) return;
-        if (!tower.isStunned)
+        if (!tower.isStunned) //pokud je věž omráčená, tak nemůže střílet
         {
-            RotateTowardsTarget();   
+            RotateTowardsTarget(); //otáčení věže k cíly
             if (_previousTargetingStyle != currentTargetingStyle)
             {
-                HandleTargetStyleSwitch();
+                HandleTargetStyleSwitch(); //zpracování změny stylu zaměřování
             }
 
             if (nextAttackTime <= 0f)
             {
-                Attack();
-                nextAttackTime = 1f / attackSpeed;
+                Attack(); 
+                nextAttackTime = 1f / attackSpeed; //resetování časovače
             }
             
         }
-        nextAttackTime -= Time.deltaTime;  
+        nextAttackTime -= Time.deltaTime; //odpocet času do dalšího útoku
     } 
     
-    public void Attack()
+    public void Attack() //funkce na útok nepřátelských jednotek
     {
         
 
-        Vector2 direction = (currentTarget.transform.position - firingPoint.position).normalized;
-        RaycastHit2D hit = Physics2D.Raycast(firingPoint.position, direction, detectionRadius, enemyLayer);
+        Vector2 direction = (currentTarget.transform.position - firingPoint.position).normalized; //výpočet směru útoku
+        RaycastHit2D hit = Physics2D.Raycast(firingPoint.position, direction, detectionRadius, enemyLayer); //výsřelení paprsku pro detekci zásahu
         if (hit.collider != null && hit.collider.CompareTag("Enemy"))
         {
             EnemyHealth enemy = hit.collider.GetComponent<EnemyHealth>();
-            muzzleFlash.Play();
-            enemy.TakeDamage(tower.damage); 
+            muzzleFlash.Play(); //spuštění efektu výstřelu 
+            enemy.TakeDamage(tower.damage); //udělení poškození nepřátelským jednotkám
             
         }
     }
-    private void RotateTowardsTarget()
+    private void RotateTowardsTarget() //funkce na otáčení se k cíly
     {
-
+        
         float angle = Mathf.Atan2(currentTarget.transform.position.y - transform.position.y,
-        currentTarget.transform.position.x - transform.position.x) * Mathf.Rad2Deg - 90f;
+        currentTarget.transform.position.x - transform.position.x) * Mathf.Rad2Deg - 90f; //výpočet úhlu otočení směrm k cíly
     
-        Quaternion targetRotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
+        Quaternion targetRotation = Quaternion.Euler(new Vector3(0f, 0f, angle)); 
 
-        rotatingPoint.rotation = Quaternion.Slerp(rotatingPoint.rotation, targetRotation, smoothTime);
+        rotatingPoint.rotation = Quaternion.Slerp(rotatingPoint.rotation, targetRotation, smoothTime); //okamžité otočení věže na cílový úhel
     }
 
     /*private void OnDrawGizmos() //debug testing
@@ -88,23 +88,23 @@ public class HitScanTower : MonoBehaviour
         Handles.DrawWireDisc(transform.position, transform.forward, Tower.main.attackRange);
     }*/
 
-    private void DetectEnemies()
+    private void DetectEnemies() //funkce na detekci nepřátelských jednotek
     {
-        targetsInRange.Clear();
+        targetsInRange.Clear(); //vyčištění seznamu detekovaných nepřátel
 
-        Collider2D[] detectedEnemies = Physics2D.OverlapCircleAll(transform.position, detectionRadius, enemyLayer);
+        Collider2D[] detectedEnemies = Physics2D.OverlapCircleAll(transform.position, detectionRadius, enemyLayer); //detekce všech nepřátel v dosahu
         foreach (var collider in detectedEnemies)
         {
             EnemyHealth enemy = collider.GetComponent<EnemyHealth>();
             if (enemy != null && (!enemy.isHidden || (enemy.isHidden && tower.hiddenDetection)) && tower.isPlaced == true)
             {
-                targetsInRange.Add(enemy);
+                targetsInRange.Add(enemy); //přidání detekovaných nepřátelských jednotek do seznamu
             }
         }
     }
 
 
-    private void GetCurrentTarget()
+    private void GetCurrentTarget() //funkce na styl zaměřování
     {
         if (targetsInRange.Count <= 0)
         {
@@ -114,7 +114,7 @@ public class HitScanTower : MonoBehaviour
 
         targetsInRange = targetsInRange.Where(e => e != null && e.GetComponent<EnemyMovement>() != null)
         .OrderByDescending(e => e.GetComponent<EnemyMovement>().pathIndx)
-        .ToList();
+        .ToList(); //seřazení nepřátelských jednotek podle jejich pozice na cestě pomocí lambdy
 
         switch (currentTargetingStyle)
         {
@@ -135,24 +135,24 @@ public class HitScanTower : MonoBehaviour
         };
     }
     
-    private void HandleTargetStyleSwitch()
+    private void HandleTargetStyleSwitch() //funkce na převádění nové zaměřovacího stylu
     {
         _previousTargetingStyle = currentTargetingStyle;
-        GetCurrentTarget();
+        GetCurrentTarget(); //aktualizace cíle podle nového stylu
     }
 
-    public void SwitchTargetingStyle()
+    public void SwitchTargetingStyle() //funkce na přepnutí dalšího stylu zaměřování
     {
         currentTargetingStyle++;
 
-        if ((int)currentTargetingStyle >= System.Enum.GetValues(typeof(TargetingStyle)).Length)
+        if ((int)currentTargetingStyle >= System.Enum.GetValues(typeof(TargetingStyle)).Length) //pokud je přesah počtu stylů, tak se vrátí zpět na první styl
         {
             currentTargetingStyle = 0;
         }
 
         tower.targetingText.text = $"Target: {currentTargetingStyle}";
 
-        HandleTargetStyleSwitch();
+        HandleTargetStyleSwitch(); 
     }
 }
 

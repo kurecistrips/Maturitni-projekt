@@ -12,7 +12,7 @@ public class FarmTower : MonoBehaviour
 
     private void Start()
     {
-        if (WaveManagerTest.main.waveCommencing == true)
+        if (WaveManager.main.waveCommencing == true)
         {
             placedDuringWave = true;
         }
@@ -21,7 +21,7 @@ public class FarmTower : MonoBehaviour
 
     private void Update()
     {
-        if (WaveManagerTest.main.waveCommencing != false)
+        if (WaveManager.main.waveCommencing != false)
         {
             if (giveMoney != true && placedDuringWave != true || placedDuringPrep == true)
             {

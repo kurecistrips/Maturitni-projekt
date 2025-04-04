@@ -16,7 +16,7 @@ public class BossScript : MonoBehaviour
     
     private void Start()
     {
-        attackCooldown = setAttackCooldown;
+        attackCooldown = setAttackCooldown; 
     }
 
     private void Update()

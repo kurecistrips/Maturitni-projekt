@@ -4,57 +4,60 @@ using System.IO;
 using TMPro;
 using UnityEngine.UI;
 
+//hlavní skript
 public class TowerSelectionManager : MonoBehaviour
 {
     public static TowerSelectionManager main;
-    public TowerButtons[] towerButtons;
-    public List<GameObject> availableTowers;
-    public List<GameObject> selectedTowers = new List<GameObject>();
-    public HotBar[] hotBar;
-    public TextMeshProUGUI nameText, damageText, rangeText, costText;
-    public Image towerImage;
-    public Button equipButton;
-    public Button buyButton;
-    public GameObject lockedTowerGO;
-    public TextMeshProUGUI buyButtonText;
-    public Image equipButtonColor;
-    public TextMeshProUGUI equipButtonText;
-    public Color greenColor;
+    public TowerButtons[] towerButtons; //pole tlačítek pro věže
+    public List<GameObject> availableTowers; //seznam dostupných věží
+    public List<GameObject> selectedTowers = new List<GameObject>(); //seznam vybraných věží
+    public HotBar[] hotBar; //odkazy na sloty v rychlé liště (aka hotbar)
+    public TextMeshProUGUI nameText, damageText, rangeText, costText; //UI texty
+    public Image towerImage; //obrázek věžě v UI
+    public Button equipButton; //tlačítko pro vybavení věže
+    public Button buyButton; //tlačítko pro nákup věže
+    public GameObject lockedTowerGO; //UI element pro zamčenou věž
+    public TextMeshProUGUI buyButtonText; //UI text element pro nákup věže
+    public Image equipButtonColor; //UI element pro změnu barvy
+    public TextMeshProUGUI equipButtonText; //UI text element pro tlačítko
+    //barvy pro tlačítka
+    public Color greenColor; 
     public Color redColor;
+    //cesty k uloženým souborům
+    private string savePath; 
+    private string unlockedSavePath; 
+    private GameObject selectedTower; //aktuálně vybraná věž
 
-    private string savePath;
-    private string unlockedSavePath;
-    private GameObject selectedTower;
+    public Button resetBought; //testující tlačítka pro vývojáře
 
-    public Button resetBought;
-
-    public Sprite emptySlotSprite;
+    public Sprite emptySlotSprite; //obrázek (sprite) pro prázdný slot
 
     private void Awake()
     {
-        main = this;
+        main = this; //nastavení instance main
     }
 
     private void Start()
     {
+        //nastavení cest pro ukládání
         savePath = Application.persistentDataPath + "/selectedTowers.json";
         unlockedSavePath = Application.persistentDataPath + "/unlockedTowers.json";
 
         LoadSelection();
         LoadTowerUnlocks();
         
-        AssingButtons();
-        AssignTowersToHotBar();
-        UpdateUIOnStart();
+        AssignButtons(); //přiřazení funkcí tlačítkům věží
+        AssignTowersToHotBar(); //naplnění rychlé lišty věžěmí
+        UpdateUIOnStart(); //inicializace UI
 
 
-        resetBought.onClick.AddListener(ResetTowerUnlocks);
+        resetBought.onClick.AddListener(ResetTowerUnlocks); //přidání event listeneru pro reset (dev only)
     }
 
-    private void AssingButtons()
+    private void AssignButtons() //funkce pro řiřazení věží k tlačítkům
     {       
-
-        for (int i = 0; i < towerButtons.Length && i < availableTowers.Count; i++) 
+        //pro každé tlačítko věžě nastavíme obrázek a klikací akci
+        for (int i = 0; i < towerButtons.Length; i++) 
         {
             int index = i;
             Tower tower = availableTowers[index].GetComponent<Tower>();
@@ -62,18 +65,16 @@ public class TowerSelectionManager : MonoBehaviour
             Button btn = buttons.button;
             
             
-            if (tower != null)
-            {
-                btn.GetComponent<Image>().sprite = tower.towerImage;
-                btn.onClick.AddListener(() => SelectTower(availableTowers[index])); 
-            }
+            btn.GetComponent<Image>().sprite = tower.towerImage;
+            btn.onClick.AddListener(() => SelectTower(availableTowers[index])); //přiřazení nového posluchače událostí, který zavolá metodu
         }
     }
 
-    private void UpdateUIOnStart()
+    private void UpdateUIOnStart() //funkce k updatnutí UI elementů při spuštění
     {
-        LoadTowerUnlocks();
+        LoadTowerUnlocks(); //načtení otevřených věží
 
+        //aktualizace UI podle odemknutých věží
         foreach (var button in towerButtons)
         {
             if (button.isUnlocked == false)
@@ -94,14 +95,15 @@ public class TowerSelectionManager : MonoBehaviour
                 button.lockedTowerButtonGO.SetActive(false);
             }
         }
-        SelectFirstTower();
+        SelectFirstTower(); //výbraní prní věže (aby se neukazovalo nic)
     }
 
-    private void SelectFirstTower()
+    private void SelectFirstTower() //funkce k vybrání první věže
     {
-        for (int i = 0; i < availableTowers.Count; i++)
+        //automatický výběr dostupné věže
+        for (int i = 0; i < availableTowers.Count; i++) //nevím proč i++ má problém (it just works)
         {
-            TowerButtons towerButton = towerButtons[i];
+            TowerButtons towerButton = towerButtons[i]; 
 
             SelectTower(availableTowers[i]);
 
@@ -110,8 +112,9 @@ public class TowerSelectionManager : MonoBehaviour
         }
     }
 
-    public void SelectTower(GameObject towerObj)
+    public void SelectTower(GameObject towerObj) //funkce na aktualizaci UI
     {
+        //nastavení aktuálně vybrané věže a akualizaci UI
         Tower tower = towerObj.GetComponent<Tower>();
         if (tower != null)
         {
@@ -120,9 +123,9 @@ public class TowerSelectionManager : MonoBehaviour
         }
     }
 
-    private void UpdateUI(Tower tower)
+    private void UpdateUI(Tower tower) //funkce na updatnutí UI elementů
     {
-        
+        //aktualizace informací věže v UI
         nameText.text = tower.name;
         damageText.text = $"Damage: {tower.damage}";
         damageText.color = Color.red;
@@ -135,6 +138,7 @@ public class TowerSelectionManager : MonoBehaviour
 
         TowerButtons towerButton = FindTowerButton(tower);
 
+        //nastavení viditelnosti tlačítka podle dostupnosti věže
         if (towerButton != null && !towerButton.isUnlocked)
         {
             towerButton.lockedTowerButtonGO.SetActive(true);
@@ -150,8 +154,8 @@ public class TowerSelectionManager : MonoBehaviour
                 towerButton.towerPrice.text = $"{towerButton.price}$";
             }
             
-            buyButton.onClick.RemoveAllListeners();
-            buyButton.onClick.AddListener(() => BuyTower(towerButton, tower));
+            buyButton.onClick.RemoveAllListeners(); //odstranění předešlých posluchačů událostí na tlačítku (aby se neopakovaly stejné instance stejné funkce)
+            buyButton.onClick.AddListener(() => BuyTower(towerButton, tower)); //přiřazení nového posluchače událostí, který zavolá metodu
         }
         else
         {
@@ -169,13 +173,14 @@ public class TowerSelectionManager : MonoBehaviour
                 equipButtonText.text = "Equip";
                 equipButtonColor.color = greenColor;
             }
-            equipButton.onClick.RemoveAllListeners();
-            equipButton.onClick.AddListener(() => ToggleEquipTower(selectedTower));
+            equipButton.onClick.RemoveAllListeners(); //odstranění předešlých posluchačů událostí na tlačítku (aby se neopakovaly stejné instance stejné funkce)
+            equipButton.onClick.AddListener(() => ToggleEquipTower(selectedTower)); //přiřazení nového posluchače událostí, který zavolá metodu
         }
     }
 
-    public void ToggleEquipTower(GameObject towerObj)
+    public void ToggleEquipTower(GameObject towerObj) //funkce na přiřazení věže do loadoutu (vybavení věží)
     {
+        //přepínání mezi vybavením a odebráním věže
         if (selectedTowers.Contains(towerObj))
         {
             selectedTowers.Remove(towerObj);
@@ -188,12 +193,13 @@ public class TowerSelectionManager : MonoBehaviour
             equipButtonText.text = "Unequip";
             equipButtonColor.color = redColor;
         }
-        SaveSelection();
-        AssignTowersToHotBar();
+        SaveSelection(); //uloží výběr
+        AssignTowersToHotBar(); //přiřadí věže do rychlé lišty
     }
 
-    public void SaveSelection()
+    public void SaveSelection() //funkce na ukládání vybráných věží
     {
+        //uložnení do souboru
         List<string> towerNames = new List<string>();
         foreach (var tower in selectedTowers)
         {
@@ -203,8 +209,9 @@ public class TowerSelectionManager : MonoBehaviour
         File.WriteAllText(savePath, json);
     }
 
-    public void LoadSelection()
+    public void LoadSelection() //funkce na načtení vybranných věží 
     {
+        //načtení ze souboru
         if (File.Exists(savePath))
         {
             string json = File.ReadAllText(savePath);
@@ -222,7 +229,7 @@ public class TowerSelectionManager : MonoBehaviour
         }
     }
 
-    private void ResetSelection()
+    private void ResetSelection() //pro vývojáře
     {
         selectedTowers.Clear();
         SaveSelection();
@@ -240,7 +247,7 @@ public class TowerSelectionManager : MonoBehaviour
         return null;
     }
 
-    public void BuyTower(TowerButtons button, Tower tower)
+    public void BuyTower(TowerButtons button, Tower tower) //funkce pro nákup věží a otevření
     {
 
         if (CurrencyManager.main.SpendCurrency(button.price))
@@ -252,7 +259,7 @@ public class TowerSelectionManager : MonoBehaviour
         }
     }
 
-    public void SaveTowerUnlocks()
+    public void SaveTowerUnlocks() //funkce na ukládání otevřených věží
     {
         List<bool> unlockedStates = new List<bool>();
         foreach (var button in towerButtons)
@@ -263,7 +270,7 @@ public class TowerSelectionManager : MonoBehaviour
         File.WriteAllText(unlockedSavePath, json);
     }
 
-    public void LoadTowerUnlocks()
+    public void LoadTowerUnlocks() //funkce na načtení otevřených věží
     {
         if (File.Exists(unlockedSavePath))
         {
@@ -277,7 +284,7 @@ public class TowerSelectionManager : MonoBehaviour
         }
     }
 
-    public void ResetTowerUnlocks()
+    public void ResetTowerUnlocks() //pro vývojáře
     {
     
         foreach (TowerButtons button in towerButtons)
@@ -290,7 +297,7 @@ public class TowerSelectionManager : MonoBehaviour
         CurrencyManager.main.ResetCurrency();
         
     } 
-    private void UpdateUIAfterReset()
+    private void UpdateUIAfterReset() //pro vývojáře
     {
         foreach (TowerButtons button in towerButtons)
         {
@@ -301,8 +308,9 @@ public class TowerSelectionManager : MonoBehaviour
         }
     }
 
-    private void AssignTowersToHotBar()
+    private void AssignTowersToHotBar() //funkce na přiřazení věží do rychlé lišty 
     {
+        //přiřazení do lišty
         for (int i = 0; i < 6; i++)
         {
             if (i < selectedTowers.Count)
@@ -310,14 +318,14 @@ public class TowerSelectionManager : MonoBehaviour
                 Tower tower = selectedTowers[i].GetComponent<Tower>();
                 hotBar[i].hotBarImage.sprite = tower.towerImage;
                 int index = i;
-                hotBar[i].hotBarButton.onClick.RemoveAllListeners();
-                hotBar[i].hotBarButton.onClick.AddListener(() => SelectTower(selectedTowers[index]));
+                hotBar[i].hotBarButton.onClick.RemoveAllListeners(); //odstranění předešlých posluchačů událostí na tlačítku (aby se neopakovaly stejné instance stejné funkce)
+                hotBar[i].hotBarButton.onClick.AddListener(() => SelectTower(selectedTowers[index])); //přiřazení nového posluchače událostí, který zavolá metodu
 
             }
-            else
+            else //jesli slot nemá přiřazenou věž tak zobrazí obrázek pro prázdný slot
             {
                 hotBar[i].hotBarImage.sprite = emptySlotSprite;
-                hotBar[i].hotBarButton.onClick.RemoveAllListeners();
+                hotBar[i].hotBarButton.onClick.RemoveAllListeners(); //odstranění předešlých posluchačů událostí na tlačítku (aby se neopakovaly stejné instance stejné funkce)
             }
         }
     }
@@ -325,32 +333,38 @@ public class TowerSelectionManager : MonoBehaviour
 
 }
 
+//třída pro ukládání seznamu vybraných věží do souboru
 [System.Serializable]
 public class TowerSelectionWrapper
 {
-    public List<string> selectedTowers;
-    public TowerSelectionWrapper(List<string> towers) {selectedTowers = towers;}
+    public List<string> selectedTowers; //seznam vybraných věží podle názvu
+    public TowerSelectionWrapper(List<string> towers) {selectedTowers = towers;} //konstruktor pro inicializaci seznamu věži
 }
+
+//třída pro uchovávání seznamu odemčených věží
 [System.Serializable]
 public class TowerUnlockWrapper
 {
-    public List<bool> unlockedTowers;
-    public TowerUnlockWrapper(List<bool> unlocked) { unlockedTowers = unlocked; }
+    public List<bool> unlockedTowers; //seznam stavů odemčení věží
+    public TowerUnlockWrapper(List<bool> unlocked) { unlockedTowers = unlocked; } //konstruktor pro inicializaci seznamů odemčených věží
 }
 
+//třída reprezentující tlačítko ve výběru věží v UI
 [System.Serializable]
 public class TowerButtons
 {
-    public Button button;
-    public GameObject towerPrefab;
-    public bool isUnlocked;
-    public int price;
-    public GameObject lockedTowerButtonGO;
-    public TextMeshProUGUI towerPrice;
+    public Button button; //tlačítko pro výběr věže
+    public GameObject towerPrefab; //prefab věžě přizený k tlačítku
+    public bool isUnlocked; //označuje, zda je věž odemčená
+    public int price; //cena věže
+    public GameObject lockedTowerButtonGO; //ui objekt indikující zamčenou věž
+    public TextMeshProUGUI towerPrice; //UI text zobrazující cenu věže
 }
+
+//třída reprezentující sloty v rychlé liště (hotbar)
 [System.Serializable]
 public class HotBar
 {
-    public Button hotBarButton;
-    public Image hotBarImage;
+    public Button hotBarButton; //slot tlačítko
+    public Image hotBarImage; //obrázek pro slot
 }

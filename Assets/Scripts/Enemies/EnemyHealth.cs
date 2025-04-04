@@ -50,7 +50,7 @@ public class EnemyHealth : MonoBehaviour
         {
             if (enemyMovement.fromLastWave == false)
             {
-                WaveManagerTest.onEnemyDestroy.Invoke();
+                WaveManager.onEnemyDestroy.Invoke();
             }
             LevelManager.main.IncreaseCurrency(currencyWorth);
             Destroy(gameObject);

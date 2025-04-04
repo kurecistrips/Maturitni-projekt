@@ -137,7 +137,7 @@ public class LoadoutManager : MonoBehaviour
         }   
     }
 }
-
+//třída pro načítání informací pro jednotlivé věže v rychlé liště v levelu
 [System.Serializable]
 public class TowerButton
 {

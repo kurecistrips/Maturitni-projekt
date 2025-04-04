@@ -8,7 +8,7 @@ public class BossUI : MonoBehaviour
     public GameObject bossUIElement;
     public TextMeshProUGUI bossName;
     public TextMeshProUGUI bossHealth;
-    public Image bossHealthBarGO;
+    public Image bossHealthBarImage;
     private float lerpSpeed;
     [SerializeField] private EnemyHealth boss;
 
@@ -34,7 +34,11 @@ public class BossUI : MonoBehaviour
     
     private void Update()
     {
-        if (boss == null) return;
+        if (boss == null)
+        {
+            bossUIElement.SetActive(false);
+            return;
+        } 
         baseHealth = boss.healthInfo;
         maxHealth = boss.maxHealth;
 
@@ -45,17 +49,18 @@ public class BossUI : MonoBehaviour
 
         HealthBarFiller();
         ColorChanger();
+
     }
 
     private void HealthBarFiller()
     {
-        bossHealthBarGO.fillAmount = Mathf.Lerp(bossHealthBarGO.fillAmount, baseHealth / maxHealth, lerpSpeed);
+        bossHealthBarImage.fillAmount = Mathf.Lerp(bossHealthBarImage.fillAmount, baseHealth / maxHealth, lerpSpeed);
     }
     private void ColorChanger()
     {
         Color healthColor = Color.Lerp(Color.red, Color.green, (baseHealth / maxHealth));
 
-        bossHealthBarGO.color = healthColor;
+        bossHealthBarImage.color = healthColor;
     }
 
 }

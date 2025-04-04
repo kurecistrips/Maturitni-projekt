@@ -20,7 +20,7 @@ public class GameOutcome : MonoBehaviour
 
     private void Update()
     {
-    	showCoins = WaveManagerTest.main.showReceiveCoins;
+    	showCoins = WaveManager.main.showReceiveCoins;
         timer = LevelManager.main.showInGameTimer;
         
         if (LevelManager.main.victory == true)

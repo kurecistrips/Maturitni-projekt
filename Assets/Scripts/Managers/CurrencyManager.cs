@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.IO;
 
+//hlavní skript (pro měnu v hlavní menu)
 public class CurrencyManager : MonoBehaviour
 {
     public static CurrencyManager main;
@@ -9,7 +10,7 @@ public class CurrencyManager : MonoBehaviour
 
     private void Awake()
     {
-        if (main == null)
+        if (main == null) //pokud herní objekt a skript není inicializován
         {
             main = this;   
             DontDestroyOnLoad(gameObject);
@@ -18,13 +19,13 @@ public class CurrencyManager : MonoBehaviour
         }   
     }
 
-    public void AddCurrency(int amount)
+    public void AddCurrency(int amount) //funkce na zvýšení měny
     {
         currency += amount;
         SaveCurrency();
     }
 
-    public bool SpendCurrency(int amount)
+    public bool SpendCurrency(int amount) //funkce k utracení měny
     {
         if (currency >= amount)
         {
@@ -36,18 +37,18 @@ public class CurrencyManager : MonoBehaviour
         Debug.Log($"Not enough money");
         return false;
     }
-    public void ResetCurrency()
+    public void ResetCurrency() //pro vývojáře
     {
         currency = 0;
         SaveCurrency();
     }
 
-    private void SaveCurrency()
+    private void SaveCurrency() //funkce na ukládání měny
     {
         File.WriteAllText(savePath, JsonUtility.ToJson(new CurrencyData(currency)));
     }
 
-    private void LoadCurrency()
+    private void LoadCurrency() //funkce na načtení měny
     {
         if (File.Exists(savePath))
         {
@@ -57,9 +58,10 @@ public class CurrencyManager : MonoBehaviour
     }
 }
 
+//třída pro data měny
 [System.Serializable]
 public class CurrencyData
 {
-    public int amount;
-    public CurrencyData(int amount) { this.amount = amount; }
+    public int amount; //množství měny
+    public CurrencyData(int amount) { this.amount = amount; } //konstruktor pro inicializaci množství měny
 }

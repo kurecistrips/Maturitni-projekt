@@ -22,7 +22,7 @@ public class SkipWaveScript : MonoBehaviour
 
     public void OnCLickYes()
     {
-        WaveManagerTest.main.SkipWave();
+        WaveManager.main.SkipWave();
     }
     public void OnClickVeto()
     {

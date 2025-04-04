@@ -29,15 +29,17 @@ public class EnemyMovement : MonoBehaviour
 
             if (pathIndex == LevelManager.main.path.Length && fromLastWave != true)
             {
-                WaveManagerTest.onEnemyDestroy.Invoke();
+                WaveManager.onEnemyDestroy.Invoke();
                 Destroy(gameObject);
                 LevelManager.main.baseHealth -= EnemyHealth.main.healthInfo;
+                BossUI.main.bossUIElement.SetActive(false);
                 return;
             }
             else if (pathIndex == LevelManager.main.path.Length && fromLastWave != false)
             {
                 Destroy(gameObject);
                 LevelManager.main.baseHealth -= EnemyHealth.main.healthInfo;
+                BossUI.main.bossUIElement.SetActive(false);
                 return;
             }
             else 

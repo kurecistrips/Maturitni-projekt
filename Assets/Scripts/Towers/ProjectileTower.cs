@@ -5,22 +5,22 @@ using UnityEngine;
 
 public class ProjectileTower : MonoBehaviour
 {
-    public Transform firingPoint;
-    public Transform rotatingPoint;
-    public GameObject projectilePrefab;
-    public LayerMask enemyLayer;
+    public Transform firingPoint; //bod, ze kterého věž střílí
+    public Transform rotatingPoint; //bod, ze kterého věž střílí
+    public GameObject projectilePrefab; //prefab projektilu
+    public LayerMask enemyLayer; //vrstva pro detekci nepřátel
 
-    [SerializeField] private List<EnemyHealth> targetsInRange = new();
-    [SerializeField] private EnemyHealth currentTarget;
-    [SerializeField] private TargetingStyle currentTargetingStyle = TargetingStyle.First;
-    private TargetingStyle _previousTargetingStyle;
-    [SerializeField] private Tower tower;
+    [SerializeField] private List<EnemyHealth> targetsInRange = new(); //seznam nepřátelských jednotek v dosahu
+    [SerializeField] private EnemyHealth currentTarget;  //aktuálně zaměřená nepřátelská jednotka
+    [SerializeField] private TargetingStyle currentTargetingStyle = TargetingStyle.First; //aktuální styl zaměřování
+    private TargetingStyle _previousTargetingStyle; //předchozí styl zaměřování
+    [SerializeField] private Tower tower; //odkaz na věž
 
-    private float smoothTime = 0.1f;
-    public float projectileSpeed;
-    private float nextAttackTime = 0f;
-    private float detectionRadius;
-
+    private float smoothTime = 0.1f; //rychlost otáčení
+    public float projectileSpeed; //rychlost projektilu
+    private float nextAttackTime = 0f; //časovač pro další útok
+    private float detectionRadius; //rádius pro detekci nepřátelských jednotek
+ 
     private void Awake()
     {
         _previousTargetingStyle = currentTargetingStyle;   
@@ -34,29 +34,29 @@ public class ProjectileTower : MonoBehaviour
     private void Update()
     {
         detectionRadius = tower.attackRange;
-        DetectEnemies();
-        GetCurrentTarget();
+        DetectEnemies(); //detelce nepřátel v dosahu
+        GetCurrentTarget(); //výběr aktuálního cíle
 
         if (currentTarget == null) return;
-        if (!tower.isStunned)
+        if (!tower.isStunned) //pokud je věž omráčená, tak nemůže střílet
         {
-            RotateTowardsTarget();
+            RotateTowardsTarget(); //otáčení věže k cíly
             if (_previousTargetingStyle != currentTargetingStyle)
             {
-                HandleTargetStyleSwitch();
+                HandleTargetStyleSwitch(); //zpracování změny stylu zaměřování
             }
 
             if (nextAttackTime <= 0f)
             {
                 Attack();
-                nextAttackTime = 1f / tower.attackSpeed;
+                nextAttackTime = 1f / tower.attackSpeed; //resetování časovače
             }
             nextAttackTime -= Time.deltaTime;
         }
         
     }
 
-    private void DetectEnemies()
+    private void DetectEnemies() //funkce na detekci nepřátelských jednotek
     {
         targetsInRange.Clear();
 
@@ -71,7 +71,7 @@ public class ProjectileTower : MonoBehaviour
         }
     }
 
-    private void Attack()
+    private void Attack() //funkce na útok nepřátelských jednotek
     {
 
         GameObject projectile = Instantiate(projectilePrefab, firingPoint.position, Quaternion.identity);
@@ -86,7 +86,7 @@ public class ProjectileTower : MonoBehaviour
         }
     }
 
-    private void RotateTowardsTarget()
+    private void RotateTowardsTarget() //funkce na otáčení se k cíly
     {
         float angle = Mathf.Atan2(currentTarget.transform.position.y - transform.position.y,
         currentTarget.transform.position.x - transform.position.x) * Mathf.Rad2Deg - 90f;
@@ -96,7 +96,7 @@ public class ProjectileTower : MonoBehaviour
         rotatingPoint.rotation = Quaternion.Slerp(rotatingPoint.rotation, targetRotation, smoothTime);
     }
 
-    private void GetCurrentTarget()
+    private void GetCurrentTarget() //funkce na styl zaměřování
     {
         if (targetsInRange.Count <= 0)
         {
@@ -106,7 +106,7 @@ public class ProjectileTower : MonoBehaviour
 
         targetsInRange = targetsInRange.Where(e => e != null && e.GetComponent<EnemyMovement>() != null)
         .OrderByDescending(e => e.GetComponent<EnemyMovement>().pathIndx)
-        .ToList();
+        .ToList();  //seřazení nepřátelských jednotek podle jejich pozice na cestě pomocí lambdy
 
         switch (currentTargetingStyle)
         {
@@ -127,14 +127,14 @@ public class ProjectileTower : MonoBehaviour
         };
     }
     
-    private void HandleTargetStyleSwitch()
+    private void HandleTargetStyleSwitch() //funkce na převádění nové zaměřovacího stylu
     {
         _previousTargetingStyle = currentTargetingStyle;
-        GetCurrentTarget();
+        GetCurrentTarget(); //aktualizace cíle podle nového stylu
     }
     
-    public void SwitchTargetingStyle()
-    {
+    public void SwitchTargetingStyle() //funkce na přepnutí dalšího stylu zaměřování
+    { 
         currentTargetingStyle++;
 
         if ((int)currentTargetingStyle >= System.Enum.GetValues(typeof(TargetingStyle)).Length)

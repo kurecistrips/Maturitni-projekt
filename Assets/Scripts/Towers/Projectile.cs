@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    private float speed;
-    private float explosionRadius;
+    private float speed; //rychlost projektilu
+    private float explosionRadius; //rádius exploze
     public LayerMask enemyLayer;
     [SerializeField] private Rigidbody2D rb;
     //[SerializeField] private CircleCollider2D cirCollider2D;
@@ -33,7 +33,7 @@ public class Projectile : MonoBehaviour
 
     private void Update()
     {
-        if (target == null)
+        if (target == null) //pokud projektilu zmizí cíl, tak se zníčí
         {
             Destroy(gameObject);
             return;

@@ -3,15 +3,10 @@ using UnityEngine;
 
 public class MainMenuManager : MonoBehaviour
 {
-
-    private void Startgame()
-    {
-
-    }
     
-    public void QuitGame()
+    public void QuitGame() //funkce k vypnutí hry
     {
-        Application.Quit();
+        Application.Quit(); //vypne hru lol
     }
 
     
