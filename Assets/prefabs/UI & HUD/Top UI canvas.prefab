@@ -1448,7 +1448,7 @@ MonoBehaviour:
   skipPopUp: {fileID: 5002093009327444762}
   voteYes: {fileID: 8459181067026449762}
   voteNo: {fileID: 8288994087245138592}
-  veoted: 0
+  vetoed: 0
 --- !u!1 &5113571177541326049
 GameObject:
   m_ObjectHideFlags: 0
@@ -2304,7 +2304,7 @@ MonoBehaviour:
   bossUIElement: {fileID: 8683116058124728067}
   bossName: {fileID: 5158618029194569091}
   bossHealth: {fileID: 1632168534399492808}
-  bossHealthBarGO: {fileID: 3954351597836965050}
+  bossHealthBarImage: {fileID: 3954351597836965050}
   boss: {fileID: 0}
 --- !u!114 &4517714180683303063
 MonoBehaviour:

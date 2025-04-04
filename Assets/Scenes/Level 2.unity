@@ -5542,10 +5542,10 @@ MonoBehaviour:
     timeBetweenWaves: 0
     currencyPerWave: 0
   - enemies:
-    - enemyPrefab: {fileID: 0}
-      count: 0
+    - enemyPrefab: {fileID: 6464921860472007968, guid: 808dbd6dfc2d2cc4aa80588946e9edcd, type: 3}
+      count: 5
       hidden: 0
-      timeBetweenSpawns: 0
+      timeBetweenSpawns: 1
       spawnAfterStartTime: 0
     timeBetweenWaves: 45
     currencyPerWave: 125
@@ -5597,11 +5597,11 @@ MonoBehaviour:
       hidden: 0
       timeBetweenSpawns: 0.4
       spawnAfterStartTime: 0
-    - enemyPrefab: {fileID: 0}
-      count: 0
+    - enemyPrefab: {fileID: 6464921860472007968, guid: 1c68dee2fa5e44b42a1fb0a6e87c2c20, type: 3}
+      count: 3
       hidden: 0
-      timeBetweenSpawns: 0
-      spawnAfterStartTime: 0
+      timeBetweenSpawns: 1.5
+      spawnAfterStartTime: 2
     timeBetweenWaves: 45
     currencyPerWave: 500
   - enemies:

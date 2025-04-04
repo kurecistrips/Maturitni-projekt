@@ -41,7 +41,7 @@ public class WaveManager : MonoBehaviour
     private float preptime = 20f; //čas na přípravu před první vlnou
     private bool prepBool = true; //označení, zda je fáze přípravy běží
     private float waveTimeLength; //délka trvání vlny
-
+    private bool rewardGiven = false; //označení, zda hráč dostal odměnu
     private int enemiesLeftToSpawn; //počet nepřátel zbývajících ke spawnutí
     private int enemiesAlive; //počet aktuálně živých nepřátel
     public bool waveCommencing = false; //označení, zda je vlna běží
@@ -202,11 +202,11 @@ public class WaveManager : MonoBehaviour
         recievedCoins = getCoins * (currentWaveIndex / maxAmountOfWaves);
         showReceiveCoins = (int)recievedCoins;
         
-        /*if (!rewardGiven)
+        if (!rewardGiven)
         {
             CurrencyManager.main.AddCurrency((int)recievedCoins);
             rewardGiven = true;
-        }*/
+        }
         LevelManager.main.gameEnded = true;  
     }
 

@@ -601,7 +601,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1000
   healthInfo: 0
-  enemyName: Boss 1
+  enemyName: Boss Test
   currencyWorth: 10000
   hiddenAlpha: 0.5
   isHidden: 0

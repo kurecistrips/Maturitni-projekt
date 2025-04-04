@@ -637,7 +637,7 @@ MonoBehaviour:
   enemyMovement: {fileID: -4411644522748854578}
   attackRange: 100000000
   stunDurationToTowers: 69
-  setAttackCooldown: 100000000
+  setAttackCooldown: 70
   movementDelay: 1
   towerLayer:
     serializedVersion: 2
